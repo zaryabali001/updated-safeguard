@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-[#111111] text-gray-300 py-12 px-6 md:px-16 lg:px-24 border-t border-gray-800">
+    <footer className="bg-[#111111] text-gray-400 py-12 px-36 md:px-36 lg:px-30 border-t border-gray-800">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         {/* Left Section */}
         <div>
@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="flex items-center space-x-3 mb-4">
             <img src="/globe.svg" alt="Recursive Safeguarding Logo" className="w-10 h-10" />
             <div>
-              <h2 className="text-white text-lg font-semibold leading-tight">
+              <h2 className="text-white text-lg font-bold mb-1.5 leading-tight">
                 RECURSIVE
               </h2>
               <p className="text-sm text-gray-400 -mt-1">SAFEGUARDING</p>
@@ -16,8 +16,8 @@ export default function Footer() {
           </div>
 
           {/* Newsletter */}
-          <h3 className="text-white font-semibold mb-1">Stay tuned</h3>
-          <p className="text-white font-semibold mb-4">
+          <h3 className="text-white text-lg font-bold mb-1">Stay tuned</h3>
+          <p className="text-white text-lg font-semibold mb-4">
             Subscribe to our newsletter
           </p>
 
@@ -38,12 +38,14 @@ export default function Footer() {
 
         {/* Right Section */}
         <div>
-          <p className="text-gray-400 mb-4 leading-relaxed">
-            We welcome inquiries from investors, researchers, and organizations
-            interested in AI safety. Our team will respond to serious inquiries
+          <p className="text-gray-400 mb-4 leading-relaxed mb-8">
+            We welcome inquiries from investors, researchers,
+            <br></br> and organizations
+            interested in AI safety. Our team
+            <br></br> will respond to serious inquiries
             within 48 hours.
           </p>
-          <h3 className="text-white font-semibold text-lg mb-1">
+          <h3 className="text-white font-bold text-2xl mt-5 mb-5">
             Email Us Directly
           </h3>
           <a
