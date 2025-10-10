@@ -31,9 +31,9 @@ export default function HowItWorks() {
   }, []);
 
   return (
-    <section className={`flex flex-col md:flex-row items-center justify-between px-6 sm:px-10 md:px-16  lg:px-24 py-20 md:py-24  transition-colors duration-300 ${darkMode ? " bg-gray-900" : " bg-white"}`}>
+    <section className={`flex flex-col  md:flex-row items-center justify-between px-6 sm:px-10 md:px-16  lg:px-24 py-20 md:py-24  transition-colors duration-300 ${darkMode ? " bg-gray-900" : " bg-white"}`}>
       {/* Left Text Section */}
-      <div className="max-w-xl text-center md:text-left">
+      <div className="w-[100%] text-center md:text-left">
         <h4 className="text-blue-600 dark:text-blue-400 font-semibold text-base sm:text-lg mb-2">
           How It Works
         </h4>

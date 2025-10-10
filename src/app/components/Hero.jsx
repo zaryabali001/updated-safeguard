@@ -43,8 +43,8 @@ export default function Hero() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6 transition-colors duration-500">
-        <span className="text-blue-700 dark:text-blue-400">
+      <h1 className="text-5xl sm:text-5xl md:text-7xl font-bold leading-tight mb-6 transition-colors duration-500">
+        <span className="text-blue-700 ">
           Safeguarding AI
         </span>{" "}
         <span className={`${darkMode ? "text-white" : "text-black"}`}>

@@ -37,37 +37,37 @@ export default function Navbar() {
   return (
     <nav className="w-full flex justify-center fixed top-0 z-50 transition-colors duration-300">
       <div
-        className={`flex justify-between items-center rounded-2xl px-6 py-4 shadow-lg border max-w-6xl w-11/12 mt-6 transition-colors duration-300
+        className={`relative flex justify-between items-center rounded-2xl px-6 py-4 shadow-lg max-w-6xl w-11/12 mt-6 transition-all duration-300
           ${
             darkMode
-              ? "bg-[#0f0f10] text-white border border-white/20"
-              : "bg-white text-black border-gray-200"
+              ? "bg-[#0f0f10] text-white"
+              : "bg-white text-black"
           }`}
+        style={{
+          border: "2px solid transparent",
+          backgroundImage: darkMode
+            ? "linear-gradient(#0f0f10, #0f0f10), linear-gradient(90deg, #3b82f6, #2563eb)"
+            : "linear-gradient(white, white), linear-gradient(90deg, #3b82f6, #2563eb)",
+          backgroundOrigin: "border-box",
+          backgroundClip: "padding-box, border-box",
+        }}
       >
-        {/* Left - Logo and Title */}
+        {/* Left - Logo */}
         <div className="flex items-center gap-3">
-          <Image
-            src={darkMode ? "/Group1.png" : "/Group.png"} // 👈 add both logos to your /public folder
-            alt="Recursive Safeguarding Logo"
-            width={40}
-            height={40}
-            className="rounded-lg transition-all duration-300"
-          />
-          <div className="flex flex-col leading-tight">
-            <span className="text-lg font-semibold tracking-wide">RECURSIVE</span>
-            <span
-              className={`text-[10px] tracking-widest transition-colors ${
-                darkMode ? "text-gray-400" : "text-gray-600"
-              }`}
-            >
-              SAFEGUARDING
-            </span>
+          <div className="w-32 h-12 relative">
+            <Image
+              src={darkMode ? "/logowhote.png" : "/logoblaack.png"}
+              alt="Recursive Safeguarding Logo"
+              fill
+              className="object-contain transition-all duration-300"
+              priority
+            />
           </div>
         </div>
 
         {/* Center - Desktop Links */}
         <div className="hidden md:flex space-x-8">
-          {["Home", "Mission", "How it works", "Meet Our Team"].map((link) => (
+          {["Home", "Mission", "How it works", "Meet Our Team"].map((link, index) => (
             <a
               key={link}
               href="#"
@@ -76,7 +76,7 @@ export default function Navbar() {
                 after:transition-all after:duration-300 hover:after:w-full 
                 ${
                   darkMode
-                    ? "text-white hover:text-blue-400 after:bg-blue-400"
+                    ? `text-${index === 0 ? "blue-400" : "white"} hover:text-blue-400 after:bg-blue-400`
                     : "text-black hover:text-blue-600 after:bg-blue-600"
                 }`}
             >
@@ -85,24 +85,22 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Right - Dark Mode & Contact */}
+        {/* Right - Dark Mode + Contact */}
         <div className="hidden md:flex items-center gap-4">
           <button
             onClick={toggleDarkMode}
             className={`p-2 rounded-full transition ${
-              darkMode
-                ? "bg-white/10 hover:bg-white/20"
-                : "bg-black/5 hover:bg-black/10"
+              darkMode ? "bg-white/10" : "bg-black/5"
             }`}
           >
             {darkMode ? (
-              <Sun className="w-5 h-5 text-white-400" />
+              <Sun className="w-5 h-5 text-white" />
             ) : (
               <Moon className="w-5 h-5 text-gray-800" />
             )}
           </button>
 
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-xl shadow-md transition">
+          <button className="bg-blue-600 hover:bg-blue-700 text-white text-xl font-semibold px-7 py-3 rounded-[16px] shadow-md transition">
             Contact
           </button>
         </div>
@@ -112,13 +110,11 @@ export default function Navbar() {
           <button
             onClick={toggleDarkMode}
             className={`p-2 rounded-full transition ${
-              darkMode
-                ? "bg-white/10 hover:bg-white/20"
-                : "bg-black/5 hover:bg-black/10"
+              darkMode ? "bg-white/10" : "bg-black/5"
             }`}
           >
             {darkMode ? (
-              <Sun className="w-5 h-5 text-yellow-400" />
+              <Sun className="w-5 h-5 text-white" />
             ) : (
               <Moon className="w-5 h-5 text-gray-800" />
             )}
@@ -128,11 +124,7 @@ export default function Navbar() {
             onClick={() => setMenuOpen(!menuOpen)}
             className="p-2 rounded-md transition"
           >
-            {menuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
