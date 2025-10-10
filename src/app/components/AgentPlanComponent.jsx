@@ -1,26 +1,52 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function AgentPlanComponent() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if (
+      storedTheme === "dark" ||
+      (!storedTheme &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+      setDarkMode(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      setDarkMode(false);
+    }
+
+    const observer = new MutationObserver(() => {
+      setDarkMode(document.documentElement.classList.contains("dark"));
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
-      className="flex flex-col lg:flex-row gap-8 lg:gap-12 p-6 md:p-10 
-      bg-white dark:bg-gray-900 min-h-screen items-center justify-center 
-      transition-colors duration-300"
+      className={`flex flex-col lg:flex-row gap-8 lg:gap-12 p-6 md:p-10 
+       min-h-screen items-center justify-center 
+      transition-colors duration-300 ${darkMode ? " bg-gray-900" : " bg-white"}`}
     >
       {/* Observe the Agent Section */}
       <div
-        className="bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-8 shadow-sm 
+        className={`  rounded-2xl p-6 sm:p-8 shadow-sm 
         w-full max-w-md md:max-w-lg border border-gray-200 dark:border-gray-700 
-        transition-all duration-300"
+        transition-all duration-300 ${darkMode ? " bg-gray-800" : " bg-gray-100"}`}
       >
-        <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-gray-900 dark:text-white 
-        transition-colors duration-300">
+        <h2 className={`text-2xl sm:text-3xl font-bold mb-3  
+        transition-colors duration-300 "${darkMode ? " text-white" : " text-black"}`}>
           Observe the Agent
         </h2>
-        <p className="text-gray-600 dark:text-gray-300 text-base mb-6 leading-relaxed 
+        <p className="text-gray-400 text-base mb-6 leading-relaxed 
         transition-colors duration-300">
           We monitor the AI's outputs in real time, capturing its actions, code,
           or decisions as it works.
@@ -59,7 +85,7 @@ export default function AgentPlanComponent() {
           {/* Center Icon */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <Image
-              src="/group.png" // Consider adding a dark mode variant, e.g., "/group-dark.png"
+              src={darkMode ? "/group1.png" : "/group.png"}
               alt="Agent"
               width={60}
               height={60}
@@ -102,15 +128,15 @@ export default function AgentPlanComponent() {
 
       {/* Infer the Plan Section */}
       <div
-        className="bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-8 shadow-sm 
+        className={` rounded-2xl p-6 sm:p-8 shadow-sm 
         w-full max-w-md md:max-w-lg border border-gray-200 dark:border-gray-700 
-        transition-all duration-300"
+        transition-all duration-300 ${darkMode ? " bg-gray-800" : " bg-gray-100"}`}
       >
-        <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-gray-900 dark:text-white 
-        transition-colors duration-300">
+        <h2 className={`text-2xl sm:text-3xl font-bold mb-3  
+        transition-colors duration-300 ${darkMode ? " text-white" : " text-black"}`}>
           Infer the Plan
         </h2>
-        <p className="text-gray-600 dark:text-gray-300 text-base mb-6 leading-relaxed 
+        <p className="text-gray-400  text-base mb-6 leading-relaxed 
         transition-colors duration-300">
           Our system uses GFlowNets to convert agent behavior into structured,
           verifiable plans in ML3.
@@ -140,9 +166,9 @@ export default function AgentPlanComponent() {
           </div>
 
           <div
-            className="border-2 border-dashed border-gray-300 dark:border-gray-600 
+            className={` border-2 border-dashed 
             rounded-lg px-3 py-2 text-center text-xs sm:text-sm font-medium 
-            text-gray-900 dark:text-gray-100 transition-colors duration-300"
+            transition-colors duration-300 ${darkMode ? " text-white" : " text-black"}`}
           >
             GFlowNet Inference Engine
           </div>
@@ -163,8 +189,8 @@ export default function AgentPlanComponent() {
           </div>
 
           <div
-            className="text-center text-sm font-medium text-gray-900 dark:text-gray-100 
-            border-b border-gray-300 dark:border-gray-600 pb-2 transition-colors duration-300"
+            className= {` text-center text-sm font-medium
+            border-b  pb-2 transition-colors duration-300 ${darkMode ? " text-white" : " text-black"}`}
           >
             ML3 Program Generator
           </div>
@@ -209,8 +235,8 @@ export default function AgentPlanComponent() {
           </div>
 
           <div
-            className="text-center text-xs font-medium mt-3 text-gray-900 dark:text-gray-100 
-            border-b border-gray-300 dark:border-gray-600 pb-2 transition-colors duration-300"
+            className={` text-center text-xs font-medium mt-3  
+            border-b pb-2 transition-colors duration-300 ${darkMode ? " text-white" : " text-black"}`}
           >
             Human Review Interface
           </div>
@@ -239,8 +265,8 @@ export default function AgentPlanComponent() {
                   )}
                 </div>
                 <span
-                  className="text-xs sm:text-sm font-medium text-gray-900 dark:text-gray-100 
-                  transition-colors duration-300"
+                  className={` text-xs sm:text-sm font-medium  
+                  transition-colors duration-300 ${darkMode ? " text-white" : " text-black"}`}
                 >
                   {plan}
                 </span>

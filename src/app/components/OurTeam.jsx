@@ -1,7 +1,33 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function OurTeam() {
+  const [darkMode, setDarkMode] = useState(false);
+  
+    useEffect(() => {
+      const storedTheme = localStorage.getItem("theme");
+      if (
+        storedTheme === "dark" ||
+        (!storedTheme &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+        setDarkMode(true);
+      } else {
+        document.documentElement.classList.remove("dark");
+        setDarkMode(false);
+      }
+  
+      const observer = new MutationObserver(() => {
+        setDarkMode(document.documentElement.classList.contains("dark"));
+      });
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+      return () => observer.disconnect();
+    }, []);
+  
   const teamMembers = [
     {
       name: "Younesse Kaddar",
@@ -69,14 +95,14 @@ export default function OurTeam() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 py-16 px-6 sm:px-10 transition-colors duration-500">
+    <div className={` min-h-screen  py-16 px-6 sm:px-10 transition-colors duration-500 ${darkMode ? " bg-gray-900" : " bg-white"}`}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h1 className={ `text-4xl sm:text-5xl font-bold  mb-4 ${darkMode ? " text-white" : " text-black"}`}>
             Meet <span className="text-blue-600">Our Team</span>
           </h1>
-          <p className="text-gray-600 dark:text-gray-300 text-base sm:text-lg">
+          <p className="text-gray-400  text-base sm:text-lg">
             A world-class team of researchers and entrepreneurs
             <br />
             from Oxford, Bath and leading AI institutes.
@@ -88,7 +114,7 @@ export default function OurTeam() {
           {teamMembers.map((member, index) => (
             <div
               key={index}
-              className="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300"
+              className={` p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 ${darkMode ? " bg-gray-900" : " bg-white"}`}
             >
               {/* Image */}
               <div className="aspect-square w-full mb-4 overflow-hidden rounded-lg">
@@ -118,7 +144,7 @@ export default function OurTeam() {
 
               {/* Title */}
               {member.title && (
-                <p className="text-gray-900 dark:text-gray-200 font-medium text-sm mb-2">
+                <p className={`font-medium text-sm mb-2 ${darkMode ? " text-white" : " text-black"}`}>
                   {member.title}
                 </p>
               )}
