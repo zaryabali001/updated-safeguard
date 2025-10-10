@@ -21,21 +21,21 @@ export default function MissionSection() {
 
         {/* Right Side */}
         <div className="space-y-6 md:space-y-8">
-          <div className="border-t border-blue-500 pt-3 md:pt-4">
+          <div className="border-t-[0.5px] border-blue-700 pt-3 md:pt-4">
             <h3 className="text-xl md:text-2xl font-semibold">Alignment</h3>
             <p className="text-gray-300 mt-1 md:mt-2 text-sm md:text-base">
               Ensuring AI systems stay in sync with human intent and ethics
             </p>
           </div>
 
-          <div className="border-t border-blue-500 pt-3 md:pt-4">
+          <div className="border-t-[0.5px] border-blue-700 pt-3 md:pt-4">
             <h3 className="text-xl md:text-2xl font-semibold">Verification</h3>
             <p className="text-gray-300 mt-1 md:mt-2 text-sm md:text-base">
               Building transparent models that can be tested and trusted
             </p>
           </div>
 
-          <div className="border-t border-blue-500 pt-3 md:pt-4">
+          <div className="border-t-[0.5px] border-blue-700 pt-3 md:pt-4">
             <h3 className="text-xl md:text-2xl font-semibold">Trust</h3>
             <p className="text-gray-300 mt-1 md:mt-2 text-sm md:text-base">
               Creating AI agents that act reliably in real-world applications

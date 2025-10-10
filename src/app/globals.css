@@ -12,14 +12,22 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-:root.dark body {
+.dark body {
   background-color: #0f0f10;
   color: white;
 }
 
-/* Hero section */
+.dark .hero-section {
+  background-color: #0f0f10;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+
 .hero-section {
-  background-color: #f3f3f3;
+  background-color: var(--hero-bg);
   background-image:
     linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
@@ -28,10 +36,39 @@ body {
   transition: background-color 0.5s ease, border-color 0.5s ease;
 }
 
-:root.dark .hero-section {
+.dark .hero-section {
   background-color: #0f0f10;
   background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Ensure text inside the hero switches colors when .dark is applied to the document */
+.hero-section h1,
+.hero-section p,
+.hero-section a,
+.hero-section span {
+  transition: color 0.3s ease;
+}
+
+/* Default (light) hero text colors */
+.hero-section h1 { color: #0f172a; } /* Tailwind slate-900 approximate */
+.hero-section p { color: #4b5563; }  /* Tailwind gray-600 approximate */
+
+/* Dark-mode overrides when the root/document has the 'dark' class */
+:root.dark .hero-section h1,
+.dark .hero-section h1 {
+  color: #ffffff; /* white for headings in dark mode */
+}
+
+:root.dark .hero-section p,
+.dark .hero-section p {
+  color: #cbd5e1; /* tailwind slate-300 / gray-300 */
+}
+
+/* Make sure any specific spans using gray-900 in light mode flip to white in dark mode if they have the dark: utility */
+.hero-section .dark\\:text-white,
+.dark .hero-section .dark\\:text-white {
+  color: #ffffff;
 }
