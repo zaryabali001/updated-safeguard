@@ -1,8 +1,11 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 /* Global transition for smooth color changes */
 html {
   transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: "Inter", sans-serif;
+
 }
 
 /* Light and dark body setup */
@@ -72,3 +75,4 @@ body {
 .dark .hero-section .dark\\:text-white {
   color: #ffffff;
 }
+

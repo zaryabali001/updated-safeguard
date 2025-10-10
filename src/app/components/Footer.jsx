@@ -13,20 +13,20 @@ export default function Footer() {
           <div className="flex items-center space-x-3 mb-4">
             <img src="/Group1.png" alt="Recursive Safeguarding Logo" className="w-10 h-10" />
             <div>
-              <h2 className="text-white text-lg font-semibold leading-tight">
+              <h2 className="text-white text-lg font-semibold leading-tight ">
                 RECURSIVE
               </h2>
-              <p className="text-sm text-gray-400 -mt-1">SAFEGUARDING</p>
+              <p className="text-sm text-gray-400 mt-1">SAFEGUARDING</p>
             </div>
           </div>
 
           {/* Newsletter */}
-          <h3 className="text-white font-semibold mb-1">Stay tuned</h3>
-          <p className="text-white font-semibold mb-4">
+          <h3 className="text-white font-semibold pt-6">Stay tuned</h3>
+          <p className="text-white font-semibold ">
             Subscribe to our newsletter
           </p>
 
-          <form className="flex items-center max-w-sm">
+          <form className="flex items-center max-w-sm mt-5">
             <input
               type="email"
               placeholder="Enter your email"
@@ -43,17 +43,17 @@ export default function Footer() {
 
         {/* Right Section */}
         <div>
-          <p className="text-gray-400 mb-4 leading-relaxed">
+          <p className="text-gray-400 S">
             We welcome inquiries from investors, researchers, and organizations
             interested in AI safety. Our team will respond to serious inquiries
             within 48 hours.
           </p>
-          <h3 className="text-white font-semibold text-lg mb-1">
+          <h3 className="text-white font-semibold text-lg pt-10 ">
             Email Us Directly
           </h3>
           <a
             href="mailto:contact@recursive-safeguarding.org"
-            className="text-blue-400 hover:text-blue-500 transition-colors"
+            className="text-blue-400 hover:text-blue-500 transition-colors pt-6"
           >
             contact@recursive-safeguarding.org
           </a>
