@@ -1,27 +1,32 @@
+'use client';
+
+import React from 'react';
+import Image from "next/image";
+
 export default function Footer() {
   return (
-    <footer className="bg-[#111111] text-gray-400 py-12 px-36 md:px-36 lg:px-30 border-t border-gray-800">
+    <footer className="bg-[#111111] text-gray-300 py-12 px-6 md:px-16 lg:px-24 border-t border-gray-800">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         {/* Left Section */}
         <div>
           {/* Logo */}
           <div className="flex items-center space-x-3 mb-4">
-            <img src="/globe.svg" alt="Recursive Safeguarding Logo" className="w-10 h-10" />
+            <img src="/Group1.png" alt="Recursive Safeguarding Logo" className="w-10 h-10" />
             <div>
-              <h2 className="text-white text-lg font-bold mb-1.5 leading-tight">
+              <h2 className="text-white text-lg font-semibold leading-tight ">
                 RECURSIVE
               </h2>
-              <p className="text-sm text-gray-400 -mt-1">SAFEGUARDING</p>
+              <p className="text-sm text-gray-400 mt-1">SAFEGUARDING</p>
             </div>
           </div>
 
           {/* Newsletter */}
-          <h3 className="text-white text-lg font-bold mb-1">Stay tuned</h3>
-          <p className="text-white text-lg font-semibold mb-4">
+          <h3 className="text-white font-semibold pt-6">Stay tuned</h3>
+          <p className="text-white font-semibold ">
             Subscribe to our newsletter
           </p>
 
-          <form className="flex items-center max-w-sm">
+          <form className="flex items-center max-w-sm mt-5">
             <input
               type="email"
               placeholder="Enter your email"
@@ -38,19 +43,17 @@ export default function Footer() {
 
         {/* Right Section */}
         <div>
-          <p className="text-gray-400 mb-4 leading-relaxed mb-8">
-            We welcome inquiries from investors, researchers,
-            <br></br> and organizations
-            interested in AI safety. Our team
-            <br></br> will respond to serious inquiries
+          <p className="text-gray-400 S">
+            We welcome inquiries from investors, researchers, and organizations
+            interested in AI safety. Our team will respond to serious inquiries
             within 48 hours.
           </p>
-          <h3 className="text-white font-bold text-2xl mt-5 mb-5">
+          <h3 className="text-white font-semibold text-lg pt-10 ">
             Email Us Directly
           </h3>
           <a
             href="mailto:contact@recursive-safeguarding.org"
-            className="text-blue-400 hover:text-blue-500 transition-colors"
+            className="text-blue-400 hover:text-blue-500 transition-colors pt-6"
           >
             contact@recursive-safeguarding.org
           </a>
