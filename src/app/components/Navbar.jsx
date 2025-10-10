@@ -49,7 +49,7 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <div className="w-32 h-12 relative">
             <Image
-              src={darkMode ? "/white.svg" : "/black.svg"}
+              src={darkMode ? "./white.svg" : "./black.svg"}
               alt="Recursive Safeguarding Logo"
               fill
               className="object-contain transition-all duration-300"
