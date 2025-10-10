@@ -58,7 +58,7 @@ export default function Hero() {
         selected by ARIA for the UK's Safeguarded AI programme.
       </p>
 
-      <button className="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-8 py-3 rounded-full transition">
+      <button className="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-8 py-3 rounded-[16px] transition">
         Learn More
       </button>
     </section>

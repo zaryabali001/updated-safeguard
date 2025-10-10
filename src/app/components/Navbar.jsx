@@ -44,10 +44,8 @@ export default function Navbar() {
               : "bg-white text-black"
           }`}
         style={{
-          border: "2px solid transparent",
-          backgroundImage: darkMode
-            ? "linear-gradient(#0f0f10, #0f0f10), linear-gradient(90deg, #3b82f6, #2563eb)"
-            : "linear-gradient(white, white), linear-gradient(90deg, #3b82f6, #2563eb)",
+          // border: "2px solid transparent",
+          // backgroundImage: darkMod
           backgroundOrigin: "border-box",
           backgroundClip: "padding-box, border-box",
         }}
@@ -100,7 +98,7 @@ export default function Navbar() {
             )}
           </button>
 
-          <button className="bg-blue-600 hover:bg-blue-700 text-white text-xl font-semibold px-7 py-3 rounded-[16px] shadow-md transition">
+          <button className="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold px-6 py-2.5 rounded-[16px] shadow-md transition">
             Contact
           </button>
         </div>
