@@ -96,7 +96,7 @@ export default function Navbar() {
             }`}
           >
             {darkMode ? (
-              <Sun className="w-5 h-5 text-yellow-400" />
+              <Sun className="w-5 h-5 text-white-400" />
             ) : (
               <Moon className="w-5 h-5 text-gray-800" />
             )}
