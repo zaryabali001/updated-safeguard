@@ -1,10 +1,51 @@
+
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 export default function AgentPlanComponent() {
   const [darkMode, setDarkMode] = useState(false);
+  const cardRefs = useRef([]); // Store references to card elements
+
+  useEffect(() => {
+    // GSAP animation for cards
+    cardRefs.current.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        {
+          opacity: 0,
+          y: 50,
+          scale: 0.95,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 80%", // Start animation when top of card is 80% from top of viewport
+            end: "top 20%", // End animation when top of card is 20% from top of viewport
+            toggleActions: "play none none reverse", // Play on enter, reverse on leave
+            // markers: true, // Uncomment for debugging ScrollTrigger positions
+          },
+          delay: index * 0.2, // Stagger animations by 0.2s
+        }
+      );
+    });
+
+    // Cleanup on unmount
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -23,10 +64,12 @@ export default function AgentPlanComponent() {
     const observer = new MutationObserver(() => {
       setDarkMode(document.documentElement.classList.contains("dark"));
     });
+
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class"],
     });
+
     return () => observer.disconnect();
   }, []);
 
@@ -34,28 +77,41 @@ export default function AgentPlanComponent() {
     <div
       className={`flex flex-col lg:flex-row gap-8 lg:gap-12 p-6 md:p-10 
        min-h-screen items-center justify-center 
-      transition-colors duration-300 ${darkMode ? " bg-gray-900" : " bg-white"}`}
+      transition-colors duration-300 ${
+        darkMode ? " bg-gray-900" : " bg-white"
+      }`}
     >
       {/* Observe the Agent Section */}
       <div
-        className={`  rounded-2xl p-6 sm:p-8 shadow-sm 
+        ref={(el) => (cardRefs.current[0] = el)} // Add ref to card
+        className={`rounded-2xl p-6 sm:p-8 shadow-sm 
         w-full max-w-md md:max-w-lg border border-gray-200 dark:border-gray-700 
-        transition-all duration-300 ${darkMode ? " bg-gray-800" : " bg-gray-100"}`}
+        transition-all duration-300 hover:border-blue-800 dark:hover:border-blue-800 ${
+          darkMode ? " bg-gray-800" : " bg-gray-100"
+        }`}
       >
-        <h2 className={`text-2xl sm:text-3xl font-bold mb-3  
-        transition-colors duration-300 "${darkMode ? " text-white" : " text-black"}`}>
+        <h2
+          className={`text-2xl sm:text-3xl font-bold mb-3  
+        transition-colors duration-300 ${
+          darkMode ? " text-white" : " text-black"
+        }`}
+        >
           Observe the Agent
         </h2>
-        <p className="text-gray-400 text-base mb-6 leading-relaxed 
-        transition-colors duration-300">
+        <p
+          className="text-gray-400 text-base mb-6 leading-relaxed 
+        transition-colors duration-300"
+        >
           We monitor the AI's outputs in real time, capturing its actions, code,
           or decisions as it works.
         </p>
 
         {/* Circular Diagram */}
         <div className="relative w-56 sm:w-72 h-64 sm:h-96 mx-auto mt-6">
-          {/* Outer Circle */}
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
+          <svg
+            className="absolute inset-0 w-full h-full"
+            viewBox="0 0 400 400"
+          >
             <circle
               cx="200"
               cy="200"
@@ -64,12 +120,13 @@ export default function AgentPlanComponent() {
               stroke="currentColor"
               strokeWidth="2"
               strokeDasharray="8 8"
-              className="text-gray-300 dark:text-gray-600 transition-colors duration-300"
+              className="text-gray-300 dark:text-gray-600 transition-colors duration-100"
             />
           </svg>
-
-          {/* Inner Circle */}
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
+          <svg
+            className="absolute inset-0 w-full h-full"
+            viewBox="0 0 400 400"
+          >
             <circle
               cx="200"
               cy="200"
@@ -78,11 +135,9 @@ export default function AgentPlanComponent() {
               stroke="currentColor"
               strokeWidth="2"
               strokeDasharray="8 8"
-              className="text-blue-400 dark:text-blue-300 transition-colors duration-300"
+              className="text-blue-400 dark:text-blue-300 transition-colors duration-100"
             />
           </svg>
-
-          {/* Center Icon */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <Image
               src={darkMode ? "/group1.png" : "/group.png"}
@@ -92,33 +147,49 @@ export default function AgentPlanComponent() {
               className="transition-opacity duration-300"
             />
           </div>
-
-          {/* Labels */}
           {[
             { position: "left-0 top-1/2 -translate-y-1/2", label: "Tool" },
-            { position: "top-3 left-1/2 -translate-x-1/2", label: "Code", vertical: true },
+            {
+              position: "top-3 left-1/2 -translate-x-1/2",
+              label: "Code",
+              vertical: true,
+            },
             { position: "right-0 top-1/2 -translate-y-1/2", label: "Apps" },
-            { position: "bottom-3 left-1/2 -translate-x-1/2", label: "Chat", vertical: true },
+            {
+              position: "bottom-3 left-1/2 -translate-x-1/2",
+              label: "Chat",
+              vertical: true,
+            },
           ].map(({ position, label, vertical }) => (
             <div key={label} className={`absolute ${position}`}>
-              <div className={`flex ${vertical ? "flex-col items-center gap-1" : "items-center gap-2"}`}>
+              <div
+                className={`flex ${
+                  vertical ? "flex-col items-center gap-1" : "items-center gap-2"
+                }`}
+              >
                 {vertical && label !== "Chat" && (
-                  <div className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full 
-                  transition-colors duration-300"></div>
+                  <div
+                    className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full 
+                  transition-colors duration-300"
+                  ></div>
                 )}
                 <div
                   className="bg-blue-500 dark:bg-blue-400 text-white px-3 py-1 rounded-md 
-                  text-xs sm:text-sm shadow transition-colors duration-300"
+                  text-xs sm:text-sm shadow transition-colors duration-100"
                 >
                   {label}
                 </div>
                 {!vertical && (
-                  <div className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full 
-                  transition-colors duration-300"></div>
+                  <div
+                    className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full 
+                  transition-colors duration-300"
+                  ></div>
                 )}
                 {vertical && label === "Chat" && (
-                  <div className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full 
-                  transition-colors duration-300"></div>
+                  <div
+                    className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full 
+                  transition-colors duration-100"
+                  ></div>
                 )}
               </div>
             </div>
@@ -128,22 +199,30 @@ export default function AgentPlanComponent() {
 
       {/* Infer the Plan Section */}
       <div
-        className={` rounded-2xl p-6 sm:p-8 shadow-sm 
+        ref={(el) => (cardRefs.current[1] = el)} // Add ref to card
+        className={`rounded-2xl p-6 sm:p-8 shadow-sm 
         w-full max-w-md md:max-w-lg border border-gray-200 dark:border-gray-700 
-        transition-all duration-300 ${darkMode ? " bg-gray-800" : " bg-gray-100"}`}
+        transition-all duration-300 hover:border-blue-800 dark:hover:border-blue-800 ${
+          darkMode ? " bg-gray-800" : " bg-gray-100"
+        }`}
       >
-        <h2 className={`text-2xl sm:text-3xl font-bold mb-3  
-        transition-colors duration-300 ${darkMode ? " text-white" : " text-black"}`}>
+        <h2
+          className={`text-2xl sm:text-3xl font-bold mb-3  
+        transition-colors duration-300 ${
+          darkMode ? " text-white" : " text-black"
+        }`}
+        >
           Infer the Plan
         </h2>
-        <p className="text-gray-400  text-base mb-6 leading-relaxed 
-        transition-colors duration-300">
+        <p
+          className="text-gray-400 text-base mb-6 leading-relaxed 
+        transition-colors duration-300"
+        >
           Our system uses GFlowNets to convert agent behavior into structured,
           verifiable plans in ML3.
         </p>
 
-        {/* Flow Diagram */}
-        <div className="mt-8 space-y-4">
+        <div className=" space-y-4 mt-[-29px]">
           <div className="flex items-center justify-center gap-3">
             <div
               className="bg-blue-500 dark:bg-blue-400 text-white px-5 py-2 rounded-md 
@@ -162,24 +241,40 @@ export default function AgentPlanComponent() {
                 strokeDasharray="5 5"
                 className="text-gray-400 dark:text-gray-600 transition-colors duration-300"
               />
-            </svg>
-          </div>
+            </svg> 
+            <br />
+            <div className="mt-10">
 
-          <div
-            className={` border-2 border-dashed 
-            rounded-lg px-3 py-2 text-center text-xs sm:text-sm font-medium 
-            transition-colors duration-300 ${darkMode ? " text-white" : " text-black"}`}
-          >
-            GFlowNet Inference Engine
-          </div>
-
-          <div className="flex justify-center">
-            <svg width="2" height="25">
+             <svg width="2" height="45">
               <line
                 x1="1"
                 y1="0"
                 x2="1"
-                y2="25"
+                y2="45"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeDasharray="5 5"
+                className="text-gray-400 dark:text-gray-600 transition-colors duration-300 mt-9"
+              />
+            </svg>
+            </div>
+          </div>
+          
+          <div
+            className={`border-2 border-dashed w-[45%] flex ml-50            rounded-lg px-3 py-2 text-center text-xs sm:text-sm font-medium 
+            transition-colors duration-300 ${
+              darkMode ? " text-white" : " text-black"
+            }`}
+          >
+            GFlowNet Inference Engine
+          </div>
+          <div className="flex justify-center ">
+            <svg width="2" height="45">
+              <line
+                x1="1"
+                y1="0"
+                x2="1"
+                y2="45"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeDasharray="5 5"
@@ -187,32 +282,31 @@ export default function AgentPlanComponent() {
               />
             </svg>
           </div>
-
           <div
-            className= {` text-center text-sm font-medium
-            border-b  pb-2 transition-colors duration-300 ${darkMode ? " text-white" : " text-black"}`}
+            className={`text-center text-sm font-medium
+           pb-2 transition-colors duration-300 ${
+              darkMode ? " text-white" : " text-black"
+            }`}
           >
             ML3 Program Generator
           </div>
-
-          <div className="flex justify-center flex-wrap gap-2 pt-2">
+          <div className="flex justify-center flex-wrap gap-2 mt-[-15px]">
             {["Task", "Decision Rules", "Expected Outcomes"].map((label) => (
               <div
                 key={label}
-                className="border border-gray-300 dark:border-gray-600 
-                bg-gray-50 dark:bg-gray-700 px-3 py-1.5 rounded text-xs 
-                font-medium text-gray-700 dark:text-gray-200 transition-colors duration-300"
+                className=" border-dashed border  border-gray-400
+                 px-3 py-1.5 rounded text-xs 
+                font-medium text-gray-400  transition-colors duration-300"
               >
                 {label}
               </div>
             ))}
           </div>
-
           <div className="flex justify-center pt-3">
             <div
               className="flex items-center gap-2 border border-blue-400 dark:border-blue-300 
               bg-white dark:bg-gray-900 px-4 py-2 rounded-md shadow-sm 
-              transition-colors duration-300"
+              transition-colors duration-300  mt-[-15px]"
             >
               <svg
                 className="w-4 h-4 text-blue-500 dark:text-blue-300 transition-colors duration-300"
@@ -226,28 +320,31 @@ export default function AgentPlanComponent() {
                 />
               </svg>
               <span
-                className="text-xs sm:text-sm font-medium text-gray-900 dark:text-gray-100 
+                className="text-xs sm:text-sm  font-medium text-gray-900 dark:text-gray-100 
                 transition-colors duration-300"
               >
                 Structured Plan
               </span>
             </div>
           </div>
-
           <div
-            className={` text-center text-xs font-medium mt-3  
-            border-b pb-2 transition-colors duration-300 ${darkMode ? " text-white" : " text-black"}`}
+            className={`text-center text-xs font-medium mt-3  
+            pb-2 transition-colors duration-300 ${
+              darkMode ? " text-white" : " text-black"
+            }`}
           >
             Human Review Interface
           </div>
-
           <div className="flex justify-center flex-wrap gap-3 pt-3">
             {["Plan A", "Plan B", "Plan C"].map((plan, i) => (
               <label key={plan} className="flex items-center gap-2 cursor-pointer">
                 <div
                   className={`w-5 h-5 rounded flex items-center justify-center 
-                  ${i === 0 ? "bg-blue-500 dark:bg-blue-400" : 
-                  "border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"} 
+                  ${
+                    i === 0
+                      ? "bg-blue-500 dark:bg-blue-400"
+                      : "border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
+                  } 
                   transition-colors duration-300`}
                 >
                   {i === 0 && (
@@ -265,8 +362,10 @@ export default function AgentPlanComponent() {
                   )}
                 </div>
                 <span
-                  className={` text-xs sm:text-sm font-medium  
-                  transition-colors duration-300 ${darkMode ? " text-white" : " text-black"}`}
+                  className={`text-xs sm:text-sm font-medium  
+                  transition-colors duration-100 ${
+                    darkMode ? " text-white" : " text-black"
+                  }`}
                 >
                   {plan}
                 </span>

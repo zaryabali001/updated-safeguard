@@ -1,8 +1,70 @@
+
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 export default function HumanSteering() {
   const [darkMode, setDarkMode] = useState(false);
+  const leftSectionRef = useRef(null); // Reference for left section
+  const cardRefs = useRef([]); // References for right section cards
+
+  useEffect(() => {
+    // Animate left section (slide up from bottom)
+    gsap.fromTo(
+      leftSectionRef.current,
+      {
+        opacity: 0,
+        y: 60,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: leftSectionRef.current,
+          start: "top 85%", // Start when top of section is 85% from top of viewport
+          end: "top 30%", // End when top of section is 30% from top of viewport
+          toggleActions: "play none none reverse", // Play on enter, reverse on leave
+          // markers: true, // Uncomment for debugging ScrollTrigger positions
+        },
+      }
+    );
+
+    // Animate right section cards (staggered slide up from bottom)
+    cardRefs.current.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        {
+          opacity: 0,
+          y: 60,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%", // Start when top of card is 85% from top of viewport
+            end: "top 30%", // End when top of card is 30% from top of viewport
+            toggleActions: "play none none reverse", // Play on enter, reverse on leave
+            // markers: true, // Uncomment for debugging ScrollTrigger positions
+          },
+          delay: index * 0.2, // Stagger animations by 0.2s
+        }
+      );
+    });
+
+    // Cleanup on unmount
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -28,14 +90,25 @@ export default function HumanSteering() {
     return () => observer.disconnect();
   }, []);
 
-
   return (
-    <div className={`flex items-center justify-center py-12 px-6  transition-colors duration-300 ${darkMode ? " bg-gray-900" : " bg-white"}`}>
-      <div className={`rounded-3xl border-2 border-gray-300 dark:border-gray-700 p-8 md:p-12 w-full max-w-5xl ${darkMode ? " bg-gray-900" : " bg-gray-100"}`}>
+    <div
+      className={`flex items-center justify-center py-12 px-6 mt-[-50px] transition-colors duration-300 ${
+        darkMode ? " bg-gray-900" : " bg-white"
+      }`}
+    >
+      <div
+        className={`rounded-3xl border-2 border-gray-300 dark:border-gray-700 p-8 md:p-12 w-full max-w-5xl hover:border-blue-800 ${
+          darkMode ? " bg-gray-900" : " bg-gray-100"
+        }`}
+      >
         <div className="flex flex-col md:flex-row items-start justify-between gap-10 md:gap-16">
           {/* Left Side - Text Content */}
-          <div className="flex-1 text-center md:text-left ">
-            <h1 className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 ${darkMode ? " text-white" : " text-gray-900"}`}>
+          <div ref={leftSectionRef} className="flex-1 text-center md:text-left">
+            <h1
+              className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 ${
+                darkMode ? " text-white" : " text-gray-900"
+              }`}
+            >
               Human Steering
             </h1>
             <p className="text-gray-400 text-base sm:text-lg leading-relaxed">
@@ -49,12 +122,16 @@ export default function HumanSteering() {
           <div className="flex flex-col sm:flex-row flex-1 gap-6 sm:gap-4">
             {/* Options Column */}
             <div className="flex flex-col gap-4 flex-1">
-              {/* Best Match - Selected */}
-              <div className={`border-2 border-dashed border-blue-400 rounded-lg   p-4 ${darkMode ? " bg-blue-120" : " bg-blue-700"}`}>
-                <div className="flex items-center gap-2">
-                  <div className={`w-5 h-5  rounded flex items-center justify-center flex-shrink-0 ${darkMode ? " bg-white" : " bg-gray-900"}`}>
+              {[
+                {
+                  title: "Best Match",
+                  selected: true,
+                  bgColor: darkMode ? "bg-blue-120" : "bg-blue-700",
+                  iconBg: darkMode ? "bg-white" : "bg-gray-900",
+                  iconColor: darkMode ? "text-gray-900" : "text-white",
+                  icon: (
                     <svg
-                      className={`w-3.5 h-3.5 ${darkMode ? " text-gray-900" : " text-white"}`}
+                      className={`w-3.5 h-3.5 ${darkMode ? "text-gray-900" : "text-white"}`}
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
@@ -64,17 +141,15 @@ export default function HumanSteering() {
                         clipRule="evenodd"
                       />
                     </svg>
-                  </div>
-                  <span className="text-gray-900 dark:text-gray-100 font-medium">
-                    Best Match
-                  </span>
-                </div>
-              </div>
-
-              {/* Too Complex - Unselected */}
-              <div className={`border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg  p-4 ${darkMode ? " bg-gray-900" : " bg-gray-200"}`}>
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-full border-2 border-gray-400 dark:border-gray-500 bg-gray-100 dark:bg-gray-700 flex items-center justify-center flex-shrink-0">
+                  ),
+                },
+                {
+                  title: "Too Complex",
+                  selected: false,
+                  bgColor: darkMode ? "bg-gray-900" : "bg-gray-200",
+                  iconBg: "bg-gray-100 dark:bg-gray-700",
+                  iconColor: "text-gray-400 dark:text-gray-300",
+                  icon: (
                     <svg
                       className="w-3 h-3 text-gray-400 dark:text-gray-300"
                       viewBox="0 0 20 20"
@@ -86,17 +161,15 @@ export default function HumanSteering() {
                         clipRule="evenodd"
                       />
                     </svg>
-                  </div>
-                  <span className="text-gray-400 dark:text-gray-400 font-medium">
-                    Too Complex
-                  </span>
-                </div>
-              </div>
-
-              {/* Not Relevant - Unselected */}
-              <div className={`border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg  p-4 ${darkMode ? " bg-gray-900" : " bg-gray-200"}`}>
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-full border-2 border-gray-400 dark:border-gray-500 bg-gray-100 dark:bg-gray-700 flex items-center justify-center flex-shrink-0">
+                  ),
+                },
+                {
+                  title: "Not Relevant",
+                  selected: false,
+                  bgColor: darkMode ? "bg-gray-900" : "bg-gray-200",
+                  iconBg: "bg-gray-100 dark:bg-gray-700",
+                  iconColor: "text-gray-400 dark:text-gray-300",
+                  icon: (
                     <svg
                       className="w-3 h-3 text-gray-400 dark:text-gray-300"
                       viewBox="0 0 20 20"
@@ -108,16 +181,43 @@ export default function HumanSteering() {
                         clipRule="evenodd"
                       />
                     </svg>
+                  ),
+                },
+              ].map(({ title, selected, bgColor, iconBg, iconColor, icon }, index) => (
+                <div
+                  key={title}
+                  ref={(el) => (cardRefs.current[index] = el)} // Add ref to each option card
+                  className={`border-2 border-dashed ${
+                    selected ? "border-blue-400" : "border-gray-300 dark:border-gray-600"
+                  } rounded-lg p-4 ${bgColor}`}
+                >
+                  <div className="flex items-center gap-2">
+                    <div
+                      className={`w-5 h-5 rounded flex items-center justify-center flex-shrink-0 ${
+                        selected ? iconBg : "border-2 border-gray-400 dark:border-gray-500 " + iconBg
+                      }`}
+                    >
+                      {icon}
+                    </div>
+                    <span
+                      className={`font-medium ${
+                        selected ? "text-gray-900 dark:text-gray-100" : "text-gray-400 dark:text-gray-400"
+                      }`}
+                    >
+                      {title}
+                    </span>
                   </div>
-                  <span className="text-gray-400 dark:text-gray-400 font-medium">
-                    Not Relevant
-                  </span>
                 </div>
-              </div>
+              ))}
             </div>
 
             {/* Human Adjustment Flow */}
-            <div className={` border-2 border-dashed  rounded-lg p-6 w-full sm:w-56 flex flex-col items-center justify-between ${darkMode ? " bg-gray-900" : " bg-gray-200 border-gray-800"}`}>
+            <div
+              ref={(el) => (cardRefs.current[3] = el)} // Add ref to human adjustment card
+              className={`border-2 border-dashed rounded-lg p-6 w-full sm:w-56 flex flex-col items-center justify-between ${
+                darkMode ? "bg-gray-900 border-gray-700" : "bg-gray-200 border-gray-800"
+              }`}
+            >
               <div className="mb-4">
                 <svg
                   className="w-16 h-16 text-gray-300 dark:text-gray-400"
@@ -140,7 +240,9 @@ export default function HumanSteering() {
                 </p>
               </div>
 
-              <div className="bg-gray-200 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-full px-4 py-1.5 text-center w-full">
+              <div
+                className="bg-gray-200 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-full px-4 py-1.5 text-center w-full"
+              >
                 <span className="text-gray-700 dark:text-white text-xs font-medium">
                   Final Approved AI Plan
                 </span>

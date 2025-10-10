@@ -71,7 +71,7 @@ export default function HowItWorks() {
             alt="Recursive Safeguarding"
             width={500}
             height={400}
-            className="object-contain w-[85%] sm:w-[75%] md:w-[500px] dark:brightness-90 transition-all duration-300"
+            className="object-contain w-[100%] sm:w-[75%] md:w-[700px] dark:brightness-90 transition-all duration-300"
           />
         </div>
       </div>
