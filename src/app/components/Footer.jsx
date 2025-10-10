@@ -1,3 +1,6 @@
+import React from 'react';
+import Image from "next/image";
+
 export default function Footer() {
   return (
     <footer className="bg-[#111111] text-gray-300 py-12 px-6 md:px-16 lg:px-24 border-t border-gray-800">
@@ -6,7 +9,7 @@ export default function Footer() {
         <div>
           {/* Logo */}
           <div className="flex items-center space-x-3 mb-4">
-            <img src="/globe.svg" alt="Recursive Safeguarding Logo" className="w-10 h-10" />
+            <img src="/Group1.png" alt="Recursive Safeguarding Logo" className="w-10 h-10" />
             <div>
               <h2 className="text-white text-lg font-semibold leading-tight">
                 RECURSIVE

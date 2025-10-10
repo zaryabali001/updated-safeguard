@@ -1,0 +1,130 @@
+.agent-interface-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.observe-section, .infer-section {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  margin: 0 10px;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+p {
+  color: #666;
+  font-size: 14px;
+}
+
+.agent-diagram {
+  position: relative;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.agent-center {
+  width: 60px;
+  height: 60px;
+  background: url('path-to-agent-icon.png') no-repeat center;
+  background-size: contain;
+  margin: 0 auto;
+}
+
+.orbit {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  border: 2px dashed #1da1f2;
+  border-radius: 50%;
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.diagram-button {
+  position: absolute;
+  padding: 10px 20px;
+  background-color: #1da1f2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.diagram-button:nth-child(1) { top: 10%; left: 10%; }
+.diagram-button:nth-child(2) { top: 40%; left: 70%; }
+.diagram-button:nth-child(3) { top: 70%; left: 10%; }
+.diagram-button:nth-child(4) { top: 10%; left: 70%; }
+
+.flow-button, .plan-button, .plan-option {
+  padding: 10px 20px;
+  background-color: #1da1f2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.flow-button {
+  width: 100%;
+}
+
+.flow-line {
+  width: 2px;
+  height: 20px;
+  background-color: #1da1f2;
+  margin: 10px auto;
+}
+
+.flow-engine {
+  text-align: center;
+  color: #1da1f2;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.flow-items {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.flow-subitems {
+  display: flex;
+  justify-content: space-around;
+  color: #666;
+}
+
+.flow-subitems span {
+  flex: 1;
+  text-align: center;
+}
+
+.selected {
+  background-color: #1da1f2;
+  color: #fff;
+}
+
+.review-interface {
+  text-align: center;
+  color: #666;
+  margin: 10px 0;
+}
+
+.plan-options {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
