@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function HumanSteering() {
   const [darkMode, setDarkMode] = useState(false);
-  const leftSectionRef = useRef(null); // Reference for left section
+  const leftSectionRef = useRef(null); // Reference for left section ....
   const cardRefs = useRef([]); // References for right section cards
 
   useEffect(() => {
