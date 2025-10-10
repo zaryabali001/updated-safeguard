@@ -177,8 +177,8 @@ export default function HumanSteering() {
                 </p>
               </div>
 
-              <div className="bg-gray-200 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-full px-4 py-1.5 text-center w-full">
-                <span className="text-gray-700 dark:text-white text-xs font-medium">
+              <div className="bg-gray-200 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-full px-4 py-2 text-center w-full">
+                <span className="text-gray-700 dark:text-white text-sm md:text-sm font-light">
                   Final Approved AI Plan
                 </span>
               </div>
