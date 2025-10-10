@@ -46,38 +46,28 @@ export default function Navbar() {
         style={{
           border: "2px solid transparent",
           backgroundImage: darkMode
-            ? "linear-gradient(#0f0f10, #0f0f10), linear-gradient(90deg, #3b82f6, #9333ea)"
-            : "linear-gradient(white, white), linear-gradient(90deg, #2563eb, #60a5fa)",
+            ? "linear-gradient(#0f0f10, #0f0f10), linear-gradient(90deg, #3b82f6, #2563eb)"
+            : "linear-gradient(white, white), linear-gradient(90deg, #3b82f6, #2563eb)",
           backgroundOrigin: "border-box",
           backgroundClip: "padding-box, border-box",
         }}
       >
         {/* Left - Logo */}
         <div className="flex items-center gap-3">
-          <Image
-            src={darkMode ? "/Group1.png" : "/Group.png"}
-            alt="Recursive Safeguarding Logo"
-            width={40}
-            height={40}
-            className="rounded-lg transition-all duration-300"
-          />
-          <div className="flex flex-col leading-tight">
-            <span className="font-semibold lg:text-lg tracking-wide">
-              RECURSIVE
-            </span>
-            <span
-              className={`text-[10px] tracking-widest ${
-                darkMode ? "text-gray-400" : "text-gray-600"
-              }`}
-            >
-              SAFEGUARDING
-            </span>
+          <div className="w-32 h-12 relative">
+            <Image
+              src={darkMode ? "/logowhote.png" : "/logoblaack.png"}
+              alt="Recursive Safeguarding Logo"
+              fill
+              className="object-contain transition-all duration-300"
+              priority
+            />
           </div>
         </div>
 
-        {/* Center - Links */}
+        {/* Center - Desktop Links */}
         <div className="hidden md:flex space-x-8">
-          {["Home", "Mission", "How it works", "Meet Our Team"].map((link) => (
+          {["Home", "Mission", "How it works", "Meet Our Team"].map((link, index) => (
             <a
               key={link}
               href="#"
@@ -86,7 +76,7 @@ export default function Navbar() {
                 after:transition-all after:duration-300 hover:after:w-full 
                 ${
                   darkMode
-                    ? "text-white hover:text-blue-400 after:bg-blue-400"
+                    ? `text-${index === 0 ? "blue-400" : "white"} hover:text-blue-400 after:bg-blue-400`
                     : "text-black hover:text-blue-600 after:bg-blue-600"
                 }`}
             >
