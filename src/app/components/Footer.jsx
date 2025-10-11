@@ -12,15 +12,17 @@ export default function Footer() {
         {/* Left Section */}
         <div>
           {/* Logo */}
-          <div className="flex items-center space-x-3 mb-4">
-            <img src="/Group1.png" alt="Recursive Safeguarding Logo" className="w-10 h-10" />
-            <div>
-              <h2 className="text-white text-lg font-semibold leading-tight">
-                RECURSIVE
-              </h2>
-              <p className="text-sm text-gray-400 mt-1">SAFEGUARDING</p>
-            </div>
-          </div>
+          <div className="flex items-center gap-2 sm:gap-3">
+                   <div className="w-32 sm:w-38 h-10 sm:h-12 relative">
+                     <Image
+                       src= "/white.svg" 
+                       alt="Logo"
+                       fill
+                       className="object-contain transition-all duration-300"
+                       priority
+                     />
+                   </div>
+                 </div>
 
           {/* Newsletter */}
           <h3 className="text-white font-semibold pt-6">Stay tuned</h3>
