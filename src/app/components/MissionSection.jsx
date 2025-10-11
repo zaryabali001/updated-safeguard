@@ -60,7 +60,7 @@ export default function MissionSection() {
   return (
     <section
       ref={containerRef}
-      className="relative text-white py-24 md:py-28 overflow-hidden bg-cover bg-no-repeat bg-center h-full mt-10"
+      className="relative text-white py-24 md:py-28 overflow-hidden bg-cover bg-no-repeat bg-center h-full pt-10"
       style={{
         backgroundImage: "url('/missionbackground.jpg')",
         backgroundPosition: "left 1%",

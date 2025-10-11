@@ -132,7 +132,7 @@ export default function AgentPlanComponent() {
           </svg>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <Image
-              src={darkMode ? "/Group1.png" : "/Group.png"}
+              src={darkMode ? "/logowhite.svg" : "/LogoBlack.png"}
               alt="Agent"
               width={60}
               height={60}
@@ -140,15 +140,15 @@ export default function AgentPlanComponent() {
             />
           </div>
           {[
-            { position: "left-0 top-1/2 -translate-y-1/2", label: "Tool" },
+            { position: "left-[-10px]  top-1/2 -translate-y-1/2", label: "Tool" },
             {
-              position: "top-3 left-1/2 -translate-x-1/2",
+              position: "top-6 md:top-14 left-1/2 -translate-x-1/2",
               label: "Code",
               vertical: true,
             },
-            { position: "right-0 top-1/2 -translate-y-1/2", label: "Apps" },
+            { position: "right-2 top-1/2 -translate-y-1/2", label: "Apps" },
             {
-              position: "bottom-3 left-1/2 -translate-x-1/2",
+              position: " bottom-7 md:bottom-14  left-1/2 -translate-x-1/2",
               label: "Chat",
               vertical: true,
             },
@@ -209,15 +209,15 @@ export default function AgentPlanComponent() {
           <div className="flex items-center justify-center gap-3">
             <div
               className="bg-blue-500 dark:bg-blue-400 text-white px-5 py-2 rounded-md 
-              text-xs sm:text-sm shadow transition-colors duration-300"
+              text-xs sm:text-sm shadow transition-colors duration-300 lg:ml-5 ml-5"
             >
               AI Agent Outputs
             </div>
-            <svg width="70" height="2" className="flex-shrink-0">
+            <svg width="60" height="2" className="flex-shrink-0">
               <line
                 x1="0"
                 y1="1"
-                x2="70"
+                x2="60"
                 y2="1"
                 stroke="currentColor"
                 strokeWidth="2"
@@ -235,14 +235,14 @@ export default function AgentPlanComponent() {
                   stroke="currentColor"
                   strokeWidth="2"
                   strokeDasharray="5 5"
-                  className="text-gray-400 dark:text-gray-600 transition-colors duration-300 mt-9"
+                  className="text-gray-400 dark:text-gray-600 transition-colors duration-300 mt-12 lg:ml-9"
                 />
               </svg>
             </div>
           </div>
 
           <div
-            className={`border-2 border-dashed lg:w-[45%] w-[60%] flex lg:ml-50 ml-25 rounded-lg px-3 py-2 text-center  justify-center text-xs sm:text-sm font-medium 
+            className={`border-2 border-dashed lg:w-[45%] w-[60%] flex lg:ml-50 ml-22 rounded-lg px-3 py-2 text-center justify-center text-xs sm:text-sm font-medium 
             transition-colors duration-300  ${
               darkMode ? " text-white" : " text-black"
             }`}

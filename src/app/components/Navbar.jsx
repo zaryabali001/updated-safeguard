@@ -87,13 +87,16 @@ export default function Navbar() {
               <Moon className="w-5 h-5 text-gray-800" />
             )}
           </button>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm sm:text-base px-5 py-2 sm:px-6 sm:py-2 rounded-[16px] shadow-md transition">
-            Contact
-          </button>
+          <button
+            className="bg-blue-700 hover:bg-blue-800 text-white font-semibold text-sm border-transparent sm:text-base px-8 sm:px- py-2.5 sm:py-3 rounded-[16px] transition 
+             shadow-[0_8px_20px_-5px_rgba(37,99,235,0.6)]"
+      >
+        Contact
+      </button>
         </div>
 
         {/* ✅ Mobile Controls */}
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-2 md:hidden ">
           <button
             onClick={toggleDarkMode}
             aria-label="Toggle theme"
@@ -120,11 +123,12 @@ export default function Navbar() {
       {/* ✅ Mobile Menu */}
       {menuOpen && (
         <div
-          className={`absolute top-[75px] left-0 w-full px-4 sm:px-6 py-4 flex flex-col items-center gap-4 border-t transition-all duration-300 md:hidden ${
-            darkMode
-              ? "bg-[#0f0f10] text-white border-white/20"
-              : "bg-white text-black border-gray-200"
-          }`}
+          className={`absolute top-[75px] left-0 w-full px-4 sm:px-6 py-4 flex flex-col items-center gap-4 border-t rounded-2xl md:hidden overflow-hidden transition-all duration-300 mt-2 ${
+    darkMode
+      ? "bg-[#0f0f10] text-white border-white/20"
+      : "bg-white text-black border-gray-200"
+  } ${menuOpen ? "max-h-96 opacity-100 scale-100" : "max-h-0 opacity-0 scale-95"}`}
+
         >
           {["Home", "Mission", "How it works", "Meet Our Team"].map((link) => (
             <a
@@ -137,7 +141,7 @@ export default function Navbar() {
               {link}
             </a>
           ))}
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-xl shadow-md transition">
+          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 rounded-[16px] py-1.5 transition shadow-[0_8px_20px_-5px_rgba(37,99,235,0.6)]">
             Contact
           </button>
         </div>
