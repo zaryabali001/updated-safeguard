@@ -1,0 +1,26 @@
+/* MissionSection.module.css */
+.missionItem {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.75s cubic-bezier(0.2, 0.9, 0.2, 1) var(--delay),
+              transform 0.75s cubic-bezier(0.2, 0.9, 0.2, 1) var(--delay);
+  /* default if JS hasn't set --delay yet */
+  --delay: 0s;
+}
+
+/* this class will be added via JS (styles.inView) */
+.inView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* optional small entrance for the left column */
+.missionLeft {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s;
+}
+.missionLeftVisible {
+  opacity: 1;
+  transform: translateY(0);
+}

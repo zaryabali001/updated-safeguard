@@ -1,114 +1,105 @@
-
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
-// Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 export default function MissionSection() {
-  const leftSectionRef = useRef(null); // Reference for left section
-  const cardRefs = useRef([]); // References for right section cards
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    // Animate left section (slide up from bottom)
-    gsap.fromTo(
-      leftSectionRef.current,
-      {
-        opacity: 0,
-        y: 60,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: leftSectionRef.current,
-          start: "top 85%", // Start when top of section is 85% from top of viewport
-          end: "top 30%", // End when top of section is 30% from top of viewport
-          toggleActions: "play none none reverse", // Play on enter, reverse on leave
-          // markers: true, // Uncomment for debugging ScrollTrigger positions
-        },
-      }
-    );
+      // guard
+      if (!containerRef.current) return;
 
-    // Animate right section cards (staggered slide up from bottom)
-    cardRefs.current.forEach((card, index) => {
-      gsap.fromTo(
-        card,
-        {
-          opacity: 0,
-          y: 60,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%", // Start when top of card is 85% from top of viewport
-            end: "top 30%", // End when top of card is 30% from top of viewport
-            toggleActions: "play none none reverse", // Play on enter, reverse on leave
-            // markers: true, // Uncomment for debugging ScrollTrigger positions
-          },
-          delay: index * 0.2, // Stagger animations by 0.2s
+      // scope GSAP selectors/animations to this component and ensure cleanup on unmount/HMR
+      const ctx = gsap.context(() => {
+        // animate each item individually when it scrolls into view
+        const items = gsap.utils.toArray('[data-animate="mission-item"]');
+        if (items && items.length) {
+          items.forEach((el, idx) => {
+            gsap.from(el, {
+              opacity: 0,
+              y: 40,
+              duration: 0.8,
+              delay: idx * 0.05,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 85%",
+                toggleActions: "play none none none",
+              },
+            });
+          });
         }
-      );
-    });
 
-    // Cleanup on unmount
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
+        // Optional: animate left section (title + paragraph)
+        const leftSection = containerRef.current.querySelector(".mission-left");
+        if (leftSection) {
+          gsap.from(leftSection, {
+            opacity: 0,
+            y: 20,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: leftSection,
+              start: "top 90%",
+              toggleActions: "play none none none",
+            },
+          });
+        }
+      }, containerRef);
+
+      return () => {
+        // revert all animations and ScrollTriggers created in this context
+        ctx.revert();
+      };
+    }, []);
 
   return (
     <section
-      className="relative text-white py-24 md:py-28 overflow-hidden bg-cover bg-no-repeat bg-center h-full"
+      ref={containerRef}
+      className="relative text-white py-24 md:py-28 overflow-hidden bg-cover bg-no-repeat bg-center h-full mt-10"
       style={{
         backgroundImage: "url('/missionbackground.jpg')",
         backgroundPosition: "left 1%",
       }}
     >
-      {/* 🔹 Overlay for text readability */}
       <div className="absolute inset-0 bg-black/70" />
 
-      {/* 🔹 Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-6 md:px-16 lg:px-24 items-center">
-        {/* Left Section */}
-        <div ref={leftSectionRef}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-            Our Mission
-          </h2>
+        <div className="mission-left">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">Our Mission</h2>
           <p className="text-gray-300 leading-relaxed text-base md:text-lg">
-            As AI agents become more autonomous, they risk drifting from human
-            goals. We’re building systems that align foundation models and AI
-            agents with human intent through steerable, verifiable world models.
-            Our mission: ensure safe, human-guided AI deployment for the real
-            world.
+            As AI agents become more autonomous, they risk drifting from human goals. We’re building systems
+            that align foundation models and AI agents with human intent through steerable, verifiable world models.
+            Our mission: ensure safe, human-guided AI deployment for the real world.
           </p>
         </div>
 
-        {/* Right Section */}
         <div className="space-y-8">
-          {["Alignment", "Verification", "Trust"].map((title, index) => (
+          {[
+            {
+              title: "Alignment",
+              desc: "Ensuring AI systems stay in sync with human intent and ethics",
+            },
+            {
+              title: "Verification",
+              desc: "Building transparent models that can be tested and trusted",
+            },
+            {
+              title: "Trust",
+              desc: "Creating AI agents that act reliably in real-world applications",
+            },
+          ].map((item, i) => (
             <div
-              key={title}
-              ref={(el) => (cardRefs.current[index] = el)} // Add ref to each card
+              key={i}
+              data-animate="mission-item"
               className="border-t border-blue-500/70 pt-3"
             >
-              <h3 className="text-2xl font-semibold">{title}</h3>
-              <p className="text-gray-300 mt-1">
-                {title === "Alignment"
-                  ? "Ensuring AI systems stay in sync with human intent and ethics"
-                  : title === "Verification"
-                  ? "Building transparent models that can be tested and trusted"
-                  : "Creating AI agents that act reliably in real-world applications"}
-              </p>
+              <h3 className="text-2xl font-semibold">{item.title}</h3>
+              <p className="text-gray-300 mt-1">{item.desc}</p>
             </div>
           ))}
         </div>

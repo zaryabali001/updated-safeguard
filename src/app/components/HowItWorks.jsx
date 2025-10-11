@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -33,53 +34,56 @@ export default function HowItWorks() {
     });
 
     // GSAP animation setup
-    gsap.registerPlugin(ScrollTrigger);
+    if (typeof window !== "undefined") {
+      gsap.registerPlugin(ScrollTrigger);
 
-    // Ensure sectionRef.current exists
-    if (sectionRef.current) {
-      const textElements = sectionRef.current.querySelectorAll(
-        ".animate-text h4, .animate-text span, .animate-text p"
-      );
-
-      // Debug: Log selected elements
-      console.log("Text elements found:", textElements.length);
-
-      // Clean up existing animations to prevent overlap
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-
-      textElements.forEach((element, index) => {
-        gsap.fromTo(
-          element,
-          {
-            opacity: 0,
-            y: 50, // Slide up from bottom
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 85%", // Trigger when section top hits 85% of viewport
-              end: "bottom 15%", // End when section bottom hits 15% of viewport
-              toggleActions: "play none none reverse", // Play on enter, reverse on leave
-              // Debug: Log when animation triggers
-              onEnter: () => console.log(`Element ${index} entered`),
-              onLeaveBack: () => console.log(`Element ${index} left back`),
-            },
-            delay: index * 0.3, // Staggered one-by-one effect
-          }
+      if (sectionRef.current) {
+        const textElements = sectionRef.current.querySelectorAll(
+          ".animate-text h4, .animate-text span, .animate-text p"
         );
-      });
-    } else {
-      console.error("sectionRef.current is null");
+
+        // Debug: Log selected elements
+        console.log("Text elements found:", textElements.length);
+
+        // Clean up existing animations
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+
+        textElements.forEach((element, index) => {
+          gsap.fromTo(
+            element,
+            {
+              opacity: 0,
+              y: 60, // Start further from bottom for pronounced effect
+            },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "top 90%", // Trigger when section top hits 90% of viewport
+                end: "bottom 10%", // End when section bottom hits 10% of viewport
+                toggleActions: "play none none reverse", // Play on enter, reverse on leave
+                // Debug: Log scroll events
+                onEnter: () => console.log(`Element ${index} entered`),
+                onLeaveBack: () => console.log(`Element ${index} left back`),
+              },
+              delay: index * 0.4, // Increased stagger for one-by-one effect
+            }
+          );
+        });
+      } else {
+        console.error("sectionRef.current is null");
+      }
     }
 
     // Cleanup on unmount
     return () => {
       observer.disconnect();
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      if (typeof window !== "undefined") {
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      }
     };
   }, []);
 

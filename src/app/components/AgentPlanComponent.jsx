@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
@@ -31,12 +30,11 @@ export default function AgentPlanComponent() {
           ease: "power2.out",
           scrollTrigger: {
             trigger: card,
-            start: "top 80%", // Start animation when top of card is 80% from top of viewport
-            end: "top 20%", // End animation when top of card is 20% from top of viewport
-            toggleActions: "play none none reverse", // Play on enter, reverse on leave
-            // markers: true, // Uncomment for debugging ScrollTrigger positions
+            start: "top 80%",
+            end: "top 20%",
+            toggleActions: "play none none reverse",
           },
-          delay: index * 0.2, // Stagger animations by 0.2s
+          delay: index * 0.2,
         }
       );
     });
@@ -75,15 +73,15 @@ export default function AgentPlanComponent() {
 
   return (
     <div
-      className={`flex flex-col lg:flex-row gap-8 lg:gap-12 p-6 md:p-10 
-       min-h-screen items-center justify-center 
+      className={`flex flex-col md:flex-col lg:flex-row gap-8 lg:gap-12 
+      p-4 sm:p-6 md:p-8 min-h-screen items-center justify-center 
       transition-colors duration-300 ${
         darkMode ? " bg-gray-900" : " bg-white"
       }`}
     >
       {/* Observe the Agent Section */}
       <div
-        ref={(el) => (cardRefs.current[0] = el)} // Add ref to card
+        ref={(el) => (cardRefs.current[0] = el)}
         className={`rounded-2xl p-6 sm:p-8 shadow-sm 
         w-full max-w-md md:max-w-lg border border-gray-200 dark:border-gray-700 
         transition-all duration-300 hover:border-blue-800 dark:hover:border-blue-800 ${
@@ -92,15 +90,15 @@ export default function AgentPlanComponent() {
       >
         <h2
           className={`text-2xl sm:text-3xl font-bold mb-3  
-        transition-colors duration-300 ${
-          darkMode ? " text-white" : " text-black"
-        }`}
+          transition-colors duration-300 ${
+            darkMode ? " text-white" : " text-black"
+          }`}
         >
           Observe the Agent
         </h2>
         <p
           className="text-gray-400 text-base mb-6 leading-relaxed 
-        transition-colors duration-300"
+          transition-colors duration-300"
         >
           We monitor the AI's outputs in real time, capturing its actions, code,
           or decisions as it works.
@@ -108,10 +106,7 @@ export default function AgentPlanComponent() {
 
         {/* Circular Diagram */}
         <div className="relative w-56 sm:w-72 h-64 sm:h-96 mx-auto mt-6">
-          <svg
-            className="absolute inset-0 w-full h-full"
-            viewBox="0 0 400 400"
-          >
+          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
             <circle
               cx="200"
               cy="200"
@@ -123,10 +118,7 @@ export default function AgentPlanComponent() {
               className="text-gray-300 dark:text-gray-600 transition-colors duration-100"
             />
           </svg>
-          <svg
-            className="absolute inset-0 w-full h-full"
-            viewBox="0 0 400 400"
-          >
+          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
             <circle
               cx="200"
               cy="200"
@@ -168,10 +160,7 @@ export default function AgentPlanComponent() {
                 }`}
               >
                 {vertical && label !== "Chat" && (
-                  <div
-                    className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full 
-                  transition-colors duration-300"
-                  ></div>
+                  <div className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full transition-colors duration-300"></div>
                 )}
                 <div
                   className="bg-blue-500 dark:bg-blue-400 text-white px-3 py-1 rounded-md 
@@ -180,16 +169,10 @@ export default function AgentPlanComponent() {
                   {label}
                 </div>
                 {!vertical && (
-                  <div
-                    className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full 
-                  transition-colors duration-300"
-                  ></div>
+                  <div className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full transition-colors duration-300"></div>
                 )}
                 {vertical && label === "Chat" && (
-                  <div
-                    className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full 
-                  transition-colors duration-100"
-                  ></div>
+                  <div className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full transition-colors duration-100"></div>
                 )}
               </div>
             </div>
@@ -199,7 +182,7 @@ export default function AgentPlanComponent() {
 
       {/* Infer the Plan Section */}
       <div
-        ref={(el) => (cardRefs.current[1] = el)} // Add ref to card
+        ref={(el) => (cardRefs.current[1] = el)}
         className={`rounded-2xl p-6 sm:p-8 shadow-sm 
         w-full max-w-md md:max-w-lg border border-gray-200 dark:border-gray-700 
         transition-all duration-300 hover:border-blue-800 dark:hover:border-blue-800 ${
@@ -208,15 +191,15 @@ export default function AgentPlanComponent() {
       >
         <h2
           className={`text-2xl sm:text-3xl font-bold mb-3  
-        transition-colors duration-300 ${
-          darkMode ? " text-white" : " text-black"
-        }`}
+          transition-colors duration-300 ${
+            darkMode ? " text-white" : " text-black"
+          }`}
         >
           Infer the Plan
         </h2>
         <p
           className="text-gray-400 text-base mb-6 leading-relaxed 
-        transition-colors duration-300"
+          transition-colors duration-300"
         >
           Our system uses GFlowNets to convert agent behavior into structured,
           verifiable plans in ML3.
@@ -241,28 +224,26 @@ export default function AgentPlanComponent() {
                 strokeDasharray="5 5"
                 className="text-gray-400 dark:text-gray-600 transition-colors duration-300"
               />
-            </svg> 
-            <br />
-            <div className="mt-10">
-
-             <svg width="2" height="45">
-              <line
-                x1="1"
-                y1="0"
-                x2="1"
-                y2="45"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeDasharray="5 5"
-                className="text-gray-400 dark:text-gray-600 transition-colors duration-300 mt-9"
-              />
             </svg>
+            <div className="mt-10">
+              <svg width="2" height="45">
+                <line
+                  x1="1"
+                  y1="0"
+                  x2="1"
+                  y2="45"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeDasharray="5 5"
+                  className="text-gray-400 dark:text-gray-600 transition-colors duration-300 mt-9"
+                />
+              </svg>
             </div>
           </div>
-          
+
           <div
-            className={`border-2 border-dashed w-[45%] flex ml-50            rounded-lg px-3 py-2 text-center text-xs sm:text-sm font-medium 
-            transition-colors duration-300 ${
+            className={`border-2 border-dashed lg:w-[45%] w-[60%] flex lg:ml-50 ml-25 rounded-lg px-3 py-2 text-center  justify-center text-xs sm:text-sm font-medium 
+            transition-colors duration-300  ${
               darkMode ? " text-white" : " text-black"
             }`}
           >
@@ -283,8 +264,7 @@ export default function AgentPlanComponent() {
             </svg>
           </div>
           <div
-            className={`text-center text-sm font-medium
-           pb-2 transition-colors duration-300 ${
+            className={`text-center text-sm font-medium pb-2 transition-colors duration-300 ${
               darkMode ? " text-white" : " text-black"
             }`}
           >
