@@ -132,7 +132,7 @@ export default function AgentPlanComponent() {
           </svg>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <Image
-              src={darkMode ? "/group1.png" : "/group.png"}
+              src={darkMode ? "/Group1.png" : "/Group.png"}
               alt="Agent"
               width={60}
               height={60}
