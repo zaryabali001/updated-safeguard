@@ -160,7 +160,7 @@ export default function AgentPlanComponent() {
                 }`}
               >
                 {vertical && label !== "Chat" && (
-                  <div className="w-2 h-2 bg-blue-640  rounded-full transition-colors duration-300"></div>
+                  <div className="w-2 h-2 bg-blue-400  rounded-full transition-colors duration-300"></div>
                 )}
                 <div
                   className="bg-blue-600  text-white px-3 py-1 rounded-md 
@@ -205,15 +205,15 @@ export default function AgentPlanComponent() {
           verifiable plans in ML3.
         </p>
 
-        <div className=" space-y-4 mt-[-29px]">
+        <div className=" space-y-4 mt-[-29px] ">
           <div className="flex items-center justify-center gap-3">
             <div
-              className="bg-blue-600  text-white px-5 py-2 rounded-md 
-              text-xs sm:text-sm shadow transition-colors duration-300 lg:ml-5 ml-5"
+              className="bg-blue-700  text-white px-5 py-2 rounded-md 
+              text-xs sm:text-sm shadow transition-colors duration-300 lg:ml-5 ml-10 mr-[-12px]"
             >
               AI Agent Outputs
             </div>
-            <svg width="60" height="2" className="flex-shrink-0">
+            <svg width="60" height="2" className="flex-shrink-0 ">
               <line
                 x1="0"
                 y1="1"
@@ -225,7 +225,7 @@ export default function AgentPlanComponent() {
                 className="text-gray-400 dark:text-gray-600 transition-colors duration-300"
               />
             </svg>
-            <div className="mt-10">
+            <div className="mt-10 pr-12 m-[-9px] ">
               <svg width="2" height="45">
                 <line
                   x1="1"
@@ -235,7 +235,7 @@ export default function AgentPlanComponent() {
                   stroke="currentColor"
                   strokeWidth="2"
                   strokeDasharray="5 5"
-                  className="text-gray-400 dark:text-gray-600 transition-colors duration-300 mt-12 lg:ml-9"
+                  className="text-gray-400 dark:text-gray-600 transition-colors duration-300 mt-3  mr-19 pr-19 lg:mr-[-9px] "
                 />
               </svg>
             </div>
@@ -243,7 +243,7 @@ export default function AgentPlanComponent() {
 
           <div
             className={`border-2 border-dashed lg:w-[45%] w-[60%] flex lg:ml-50 ml-22 rounded-lg px-3 py-2 text-center justify-center text-xs sm:text-sm font-medium 
-            transition-colors duration-300  ${
+            transition-colors duration-300 mb-[-2px] mt-[-15px] ${
               darkMode ? " text-white" : " text-black"
             }`}
           >
@@ -263,18 +263,19 @@ export default function AgentPlanComponent() {
               />
             </svg>
           </div>
-          <div
-            className={`text-center text-sm font-medium pb-2 transition-colors duration-300 ${
-              darkMode ? " text-white" : " text-black"
+          <button
+            className={`text-center text-sm font-medium pb-2 transition-all bg-gray-200 px-5 py-2 rounded-md 
+               sm:text-sm shadow  duration-300 flex justify-center lg:ml-30 ml-10 mt-[-15px]   ${
+              darkMode ? " text-black" : " text-black"
             }`}
           >
             ML3 Program Generator
-          </div>
-          <div className="flex justify-center flex-wrap gap-2 mt-[-15px]">
+          </button>
+          <div className="flex justify-center flex-wrap gap-2 mt-[20px]">
             {["Task", "Decision Rules", "Expected Outcomes"].map((label) => (
               <div
                 key={label}
-                className=" border-dashed border  border-gray-400
+                className=" border-dashed border  border-blue-600
                  px-3 py-1.5 rounded text-xs 
                 font-medium text-gray-400  transition-colors duration-300"
               >
@@ -282,14 +283,14 @@ export default function AgentPlanComponent() {
               </div>
             ))}
           </div>
-          <div className="flex justify-center pt-3">
+          <div className="flex justify-center pt-3 mt-[9px]">
             <div
-              className="flex items-center gap-2 border border-blue-400 dark:border-blue-300 
+              className="flex items-center gap-2 border border-blue-400  
               bg-white dark:bg-gray-900 px-4 py-2 rounded-md shadow-sm 
-              transition-colors duration-300  mt-[-15px]"
+              transition-colors duration-300  mt-[2px]"
             >
               <svg
-                className="w-4 h-4 text-blue-500 dark:text-blue-300 transition-colors duration-300"
+                className="w-4 h-4 text-blue-500transition-colors duration-300"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -315,21 +316,21 @@ export default function AgentPlanComponent() {
           >
             Human Review Interface
           </div>
-          <div className="flex justify-center flex-wrap gap-3 pt-3">
+          <div className="flex justify-center flex-wrap gap-3 pt-3 ">
             {["Plan A", "Plan B", "Plan C"].map((plan, i) => (
-              <label key={plan} className="flex items-center gap-2 cursor-pointer">
+              <label key={plan} className="flex items-center gap-2 cursor-pointer text-white bg-gray-200 py-2 px-4 rounded-xl">
                 <div
                   className={`w-5 h-5 rounded flex items-center justify-center 
                   ${
                     i === 0
-                      ? "bg-blue-500 dark:bg-blue-400"
-                      : "border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
+                      ? "bg-blue-500"
+                      : "border-2 border-gray-300  bg-white "
                   } 
                   transition-colors duration-300`}
                 >
                   {i === 0 && (
                     <svg
-                      className="w-3.5 h-3.5 text-white"
+                      className="w-3.5 h-3.5 text-gray-200"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
@@ -344,7 +345,7 @@ export default function AgentPlanComponent() {
                 <span
                   className={`text-xs sm:text-sm font-medium  
                   transition-colors duration-100 ${
-                    darkMode ? " text-white" : " text-black"
+                    darkMode ? " text-black" : " text-black"
                   }`}
                 >
                   {plan}
