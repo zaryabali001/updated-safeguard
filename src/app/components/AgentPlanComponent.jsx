@@ -132,7 +132,7 @@ export default function AgentPlanComponent() {
           </svg>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <Image
-              src={darkMode ? "/logowhite.svg" : "/LogoBlack.png"}
+              src={darkMode ? "/logowhite.svg" : "/logoblack.svg"}
               alt="Agent"
               width={60}
               height={60}
@@ -160,10 +160,10 @@ export default function AgentPlanComponent() {
                 }`}
               >
                 {vertical && label !== "Chat" && (
-                  <div className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full transition-colors duration-300"></div>
+                  <div className="w-2 h-2 bg-blue-640  rounded-full transition-colors duration-300"></div>
                 )}
                 <div
-                  className="bg-blue-500 dark:bg-blue-400 text-white px-3 py-1 rounded-md 
+                  className="bg-blue-600  text-white px-3 py-1 rounded-md 
                   text-xs sm:text-sm shadow transition-colors duration-100"
                 >
                   {label}
@@ -208,7 +208,7 @@ export default function AgentPlanComponent() {
         <div className=" space-y-4 mt-[-29px]">
           <div className="flex items-center justify-center gap-3">
             <div
-              className="bg-blue-500 dark:bg-blue-400 text-white px-5 py-2 rounded-md 
+              className="bg-blue-600  text-white px-5 py-2 rounded-md 
               text-xs sm:text-sm shadow transition-colors duration-300 lg:ml-5 ml-5"
             >
               AI Agent Outputs

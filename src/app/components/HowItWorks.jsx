@@ -97,18 +97,18 @@ export default function HowItWorks() {
       <div className="max-w-7xl w-full flex flex-col md:flex-row items-center justify-between px-6 sm:px-10 md:px-16 lg:px-20 py-16 md:py-24 gap-12 lg:gap-20">
         {/* Left Text Section */}
         <div className="flex-1 text-center md:text-left animate-text">
-          <h4 className="text-blue-600 dark:text-blue-400 font-semibold text-base sm:text-lg mb-2">
+          <h4 className="text-blue-600 font-semibold sm:text-lg mb-2">
             How It Works
           </h4>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-snug mb-4">
             <span className={`${darkMode ? "text-white" : "text-black"}`}>
               How Recursive
             </span>{" "}
-            <span className="text-blue-600 dark:text-blue-400">
+            <span className="text-blue-600 ">
               Safeguarding Keeps
             </span>{" "}
             <br />
-            <span className="text-blue-600 dark:text-blue-400">AI</span>{" "}
+            <span className="text-blue-600 ">AI</span>{" "}
             <span className={`${darkMode ? "text-white" : "text-black"}`}>
               on Course
             </span>
