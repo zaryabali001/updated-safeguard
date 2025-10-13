@@ -34,6 +34,7 @@ export default function Hero() {
       className={`flex flex-col justify-center items-center text-center min-h-screen px-4 transition-colors duration-500 
         pt-40 sm:pt-24 md:pt-32
         ${darkMode ? "bg-[#0f0f10] text-white" : "bg-gray-50 text-black"}`}
+        id="header"
       style={{
         backgroundImage: darkMode
           ? "url(/Background1.png)"

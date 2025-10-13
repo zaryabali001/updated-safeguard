@@ -10,7 +10,7 @@ import HowItWorks from "./components/HowItWorks";
 import AgentPlanComponent from "./components/AgentPlanComponent";
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white text-black dark:bg-[#0f0f10] dark:text-white transition-colors duration-500">
+    <main className=" bg-white text-black flex flex-col gap-0">
       <Navbar />
       <Hero />
       <MissionSection />

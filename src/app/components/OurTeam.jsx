@@ -104,6 +104,7 @@ export default function OurTeam() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
+      id="team"
       className={`min-h-screen py-16 px-6 sm:px-10 transition-colors duration-500 ${
         darkMode ? "bg-gray-900" : "bg-white"
       }`}

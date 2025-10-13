@@ -93,6 +93,7 @@ export default function HowItWorks() {
       className={`w-full flex justify-center transition-colors duration-300 ${
         darkMode ? "bg-gray-900" : "bg-white"
       }`}
+      id="how-it-works"
     >
       <div className="max-w-7xl w-full flex flex-col md:flex-row items-center justify-between px-6 sm:px-10 md:px-16 lg:px-20 py-16 md:py-24 gap-12 lg:gap-20">
         {/* Left Text Section */}

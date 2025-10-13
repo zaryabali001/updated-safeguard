@@ -87,7 +87,7 @@ export default function HumanSteering() {
       }`}
     >
       <div
-        className={`rounded-3xl border-2 border-gray-300 dark:border-gray-700 p-8 md:p-12 w-full max-w-5xl hover:border-blue-800 flex justify-center ${
+        className={`rounded-3xl border-2 border-gray-300 dark:border-gray-700 p-8 md:p-12 w-full max-w-272 hover:border-blue-800 flex justify-center ${
           darkMode ? "bg-gray-900" : "bg-gray-100"
         }`}
       >
@@ -180,7 +180,7 @@ export default function HumanSteering() {
                   ref={(el) => (cardRefs.current[index] = el)}
                   className={`border-2 border-dashed ${
                     selected ? "border-blue-400" : "border-gray-300 "
-                  } rounded-lg p-4 ${bgColor} w-full sm:w-auto`}
+                  } rounded-lg p-4 ${bgColor} w-full sm:w-full`}
                 >
                   <div className="flex items-center gap-2 justify-center">
                     <div className="w-5 h-5 rounded flex items-center justify-center flex-shrink-0 bg-white">
