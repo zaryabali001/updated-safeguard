@@ -84,7 +84,7 @@ export default function HumanSteering() {
       }`}
     >
       <div
-        className={`rounded-3xl border-2 border-gray-300 dark:border-gray-700 p-8 md:p-12 w-full max-w-272 hover:border-blue-800 flex justify-center ${
+        className={`rounded-3xl border-2 border-gray-300 dark:border-gray-700 p-8 md:p-12 w-full max-w-265 hover:border-blue-800 flex justify-center ${
           darkMode ? "bg-gray-900" : "bg-gray-100"
         }`}
       >
