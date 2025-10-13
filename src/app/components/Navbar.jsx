@@ -65,7 +65,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-2 left-1/2 -translate-x-1/2 z-50 w-[90%] lg:w-[60%] flex justify-center px-2 sm:px-16">
+    <nav className="fixed top-2 left-1/2 -translate-x-1/2 z-50 w-[90%] lg:w-[65%] flex justify-center px-2 sm:px-16">
       <div
         className={`relative flex justify-between items-center w-full rounded-2xl mt-3 px-4 sm:px-6 py-3 sm:py-4 shadow-lg border border-transparent ${
           isDarkMode ? "text-white" : "text-black"
