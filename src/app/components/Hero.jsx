@@ -6,12 +6,13 @@ export default function Hero() {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
+    // ✅ Ensure this runs only on the client
+    if (typeof window === "undefined") return;
+
     const storedTheme = localStorage.getItem("theme");
-    if (
-      storedTheme === "dark" ||
-      (!storedTheme &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    if (storedTheme === "dark" || (!storedTheme && prefersDark)) {
       document.documentElement.classList.add("dark");
       setDarkMode(true);
     } else {
@@ -22,19 +23,21 @@ export default function Hero() {
     const observer = new MutationObserver(() => {
       setDarkMode(document.documentElement.classList.contains("dark"));
     });
+
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class"],
     });
+
     return () => observer.disconnect();
   }, []);
 
   return (
     <section
+      id="header"
       className={`flex flex-col justify-center items-center text-center min-h-screen px-4 transition-colors duration-500 
         pt-40 sm:pt-24 md:pt-32
         ${darkMode ? "bg-[#0f0f10] text-white" : "bg-gray-50 text-black"}`}
-        id="header"
       style={{
         backgroundImage: darkMode
           ? "url(/Background1.png)"
@@ -46,7 +49,7 @@ export default function Hero() {
     >
       <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight mb-6 transition-colors duration-500 mt-[-95px]">
         <span className="text-blue-700">Safeguarding AI</span>{" "}
-        <span className={`${darkMode ? "text-white" : "text-black"}`}>
+        <span className={darkMode ? "text-white" : "text-black"}>
           for the
           <br className="hidden sm:block" /> Long Horizon.
         </span>

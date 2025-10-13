@@ -1,21 +1,18 @@
-
-
-
 "use client";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
-
 
 export default function OurTeam() {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
+    // ✅ Run only on client
+    if (typeof window === "undefined") return;
+
     const storedTheme = localStorage.getItem("theme");
-    if (
-      storedTheme === "dark" ||
-      (!storedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    if (storedTheme === "dark" || (!storedTheme && prefersDark)) {
       document.documentElement.classList.add("dark");
       setDarkMode(true);
     } else {
@@ -26,77 +23,70 @@ export default function OurTeam() {
     const observer = new MutationObserver(() => {
       setDarkMode(document.documentElement.classList.contains("dark"));
     });
+
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class"],
     });
+
     return () => observer.disconnect();
   }, []);
 
-   const teamMembers = [
+  const teamMembers = [
     {
       name: "Younesse Kaddar",
       title: "Director",
-      image:
-        "./pic1.svg",
-      bio: "Younesse leads Hestiam, bridging AI, HCI, in software with Oxford University and while Informatics at ENAC. His research in AI safety ranges from computational neuroscience, mechanistic interpretability and trustworthy AI, to studying how AI agents are to a LLM reinforcing as Gitano. He is also the founder/educator-with-PhD of Algoria.",
+      image: "./pic1.svg",
+      bio: "Younesse leads Hestiam, bridging AI, HCI, and software with Oxford University...",
     },
     {
       name: "Rob Cornish",
       title: "Research Director",
-      image:
-        "./pic2.svg",
-      bio: "Oxford University Algorithms have and University of East Anglia's. Research a faculty member at NYU. Research Man's work on language Modelling of models understanding and controllable, text generation, and interactive model probing.",
+      image: "./pic2.svg",
+      bio: "Research faculty at NYU, Oxford University Algorithms and University of East Anglia...",
     },
     {
       name: "Sam Staton",
       title: "Scientific Advisor",
-      image:
-        "./pic3.png",
-      bio: "Professor & Oxford University. Inventor of GDL (our life grows with at MIT). Contributor Oxford as an. Basic research in mathematical, theory of programming languages and AI. Also interested leads in AI.",
+      image: "./pic3.png",
+      bio: "Professor at Oxford University. Inventor of GDL and contributor to programming theory...",
     },
     {
       name: "Pedro Amorim",
       title: "Research Scientist",
-      image:
-        "./pic4.svg",
-      bio: "Pedro is member of the University of Bath, expert in programming. Research focus LLM/reinforcement on computer/AI/programming.",
+      image: "./pic4.svg",
+      bio: "University of Bath member, expert in programming and reinforcement learning...",
     },
     {
       name: "Nikolaj Jensen",
       title: "AI Researcher",
-      image:
-        "./pic5.svg",
-      bio: "Nikel earlier as Oxford University and previously at GDL (our life up leads) at MIT. Focused on theory of AI Many of LLM/s.",
+      image: "./pic5.svg",
+      bio: "Focuses on theory of AI, previously at MIT and Oxford University...",
     },
     {
       name: "Jacek Karwowski",
       title: "AI Safety Researcher",
-      image:
-        "./pic6.svg",
-      bio: "Jacek has contributed to making AI systems more trustworthy and impact assessment, AI-safety on AIholder research at University.",
+      image: "./pic6.svg",
+      bio: "Researcher working on AI trust and safety at University of Oxford...",
     },
     {
       name: "Mohammed Mahfoud",
       title: "Principal Research Collaborator",
-      image:
-        "",
-      bio: "Independent researcher and entrepreneur. Led work on Exa-scale Safeguards Research at Anthropic, “Scientist AI” with Yoshua Bengio at MILA, and co-founded the Alignment team at TII (developers of Falcon 1 LLM). Former EdTech startup co-founder with a successful exit.",
+      image: "",
+      bio: "Independent researcher and entrepreneur. Worked with Yoshua Bengio at MILA...",
     },
     {
       name: "Paolo Perrone",
       title: "Mathematical Researcher",
-      image:
-        "./pic8.png",
-      bio: "Postdoctoral researcher at Oxford University collaborating with ARIA SGAI TA1 via Oxford and Adjoint Labs Ltd. Leading contributor to Markov category theory.",
+      image: "./pic8.png",
+      bio: "Postdoctoral researcher at Oxford University, focusing on category theory...",
     },
     {
       name: "Ali Zein",
       title: "Innovation Advisor",
-      image:
-        "./pic9.svg",
-      bio: "Experienced in technology and startups across Munich, Oxford, and Cambridge. Member of the advisory board at the Smith School of Enterprise and the Environment.",
-    }
+      image: "./pic9.svg",
+      bio: "Tech advisor and startup expert across Munich, Oxford, and Cambridge...",
+    },
   ];
 
   return (
@@ -144,11 +134,11 @@ export default function OurTeam() {
                   : "0 0 20px rgba(37,99,235,0.2)",
               }}
               className={`p-6 rounded-2xl transition-shadow duration-300 ${
-                darkMode ? "bg-gray-900" : "bg-white"
+                darkMode ? "bg-gray-800" : "bg-white"
               }`}
             >
               {/* Image */}
-              <div className="aspect-square w-full mb-4 overflow-hidden">
+              <div className="aspect-square w-full mb-4 overflow-hidden rounded-2xl">
                 {member.image ? (
                   <motion.img
                     whileHover={{ scale: 1.05 }}
@@ -170,15 +160,15 @@ export default function OurTeam() {
                 )}
               </div>
 
-              {/* Line under image */}
+              {/* Line */}
               <div className="w-full h-[1px] bg-[#2563EB] mx-auto mb-3"></div>
 
               {/* Name */}
               <h3
                 className={`font-semibold mb-1 ${
                   darkMode
-                    ? "text-[#2563EB] text-[32px]"
-                    : "text-blue-600 text-xl sm:text-2xl"
+                    ? "text-[#2563EB] text-2xl"
+                    : "text-blue-600 text-2xl"
                 }`}
               >
                 {member.name}
@@ -188,9 +178,7 @@ export default function OurTeam() {
               {member.title && (
                 <p
                   className={`font-medium mb-2 ${
-                    darkMode
-                      ? "text-[20px] text-white"
-                      : "text-[16px] text-black"
+                    darkMode ? "text-white" : "text-black"
                   }`}
                 >
                   {member.title}
@@ -202,7 +190,7 @@ export default function OurTeam() {
                 <p
                   className={`leading-relaxed ${
                     darkMode
-                      ? "text-[13px] text-[#DDDDDD]"
+                      ? "text-sm text-[#DDDDDD]"
                       : "text-sm text-gray-600"
                   }`}
                 >

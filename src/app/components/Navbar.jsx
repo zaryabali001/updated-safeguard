@@ -1,4 +1,3 @@
-
 "use client";
 import { useEffect, useState } from "react";
 import { Monitor, Moon, Sun, Menu, X } from "lucide-react";
@@ -7,6 +6,7 @@ import Image from "next/image";
 export default function Navbar() {
   const [theme, setTheme] = useState("system");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -15,28 +15,33 @@ export default function Navbar() {
     const storedTheme = localStorage.getItem("theme") || "system";
     setTheme(storedTheme);
 
-    const applyTheme = () => {
+    const applyTheme = (mode = storedTheme) => {
       const isDark =
-        storedTheme === "dark" ||
-        (storedTheme === "system" &&
+        mode === "dark" ||
+        (mode === "system" &&
           window.matchMedia("(prefers-color-scheme: dark)").matches);
       document.documentElement.classList.toggle("dark", isDark);
+      setIsDarkMode(isDark);
     };
 
-    applyTheme();
+    applyTheme(storedTheme);
 
-    // Set up listener for system theme changes if theme is "system"
+    // System theme listener
     if (storedTheme === "system") {
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
       const handleSystemThemeChange = (e) => {
         document.documentElement.classList.toggle("dark", e.matches);
+        setIsDarkMode(e.matches);
       };
       mediaQuery.addEventListener("change", handleSystemThemeChange);
-      return () => mediaQuery.removeEventListener("change", handleSystemThemeChange);
+      return () =>
+        mediaQuery.removeEventListener("change", handleSystemThemeChange);
     }
   }, []);
 
   const cycleTheme = () => {
+    if (typeof window === "undefined") return;
+
     const themes = ["system", "dark", "light"];
     const currentIndex = themes.indexOf(theme);
     const nextTheme = themes[(currentIndex + 1) % themes.length];
@@ -48,23 +53,10 @@ export default function Navbar() {
       (nextTheme === "system" &&
         window.matchMedia("(prefers-color-scheme: dark)").matches);
     document.documentElement.classList.toggle("dark", isDark);
-
-    // Update system theme listener if switching to "system"
-    if (nextTheme === "system") {
-      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      const handleSystemThemeChange = (e) => {
-        document.documentElement.classList.toggle("dark", e.matches);
-      };
-      mediaQuery.addEventListener("change", handleSystemThemeChange);
-      return () => mediaQuery.removeEventListener("change", handleSystemThemeChange);
-    }
+    setIsDarkMode(isDark);
   };
 
-  const isDarkMode =
-    theme === "dark" ||
-    (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-  // Determine icon and label for the toggle button
+  // Icons for theme toggle
   const getThemeIcon = () => {
     switch (theme) {
       case "system":
@@ -86,7 +78,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-2 left-1/2 items-center gap-3 mt-[2px] sm:mt-0 -translate-x-1/2 z-50 w-[90%] lg:w-[60%] flex justify-center px-2 sm:px-16 ">
+    <nav className="fixed top-2 left-1/2 items-center gap-3 mt-[2px] sm:mt-0 -translate-x-1/2 z-50 w-[90%] lg:w-[60%] flex justify-center px-2 sm:px-16">
       <div
         className={`relative flex justify-between items-center w-full max-w-6xl rounded-2xl mt-3 px-4 sm:px-6 py-3 sm:py-4 shadow-lg transition-colors duration-300 border border-transparent ${
           isDarkMode ? "text-white" : "text-black"
@@ -148,14 +140,18 @@ export default function Navbar() {
               onClick={cycleTheme}
               aria-label={`Switch to ${getNextThemeLabel()} theme`}
               className={`p-2 rounded-full transition ${
-                isDarkMode ? "bg-white/10 text-white hover:bg-white/20" : "bg-black/5 text-gray-800 hover:bg-black/10"
+                isDarkMode
+                  ? "bg-white/10 text-white hover:bg-white/20"
+                  : "bg-black/5 text-gray-800 hover:bg-black/10"
               }`}
             >
               {getThemeIcon()}
             </button>
             <span
               className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 text-xs font-medium rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 ${
-                isDarkMode ? "bg-gray-800 text-white" : "bg-gray-200 text-gray-800"
+                isDarkMode
+                  ? "bg-gray-800 text-white"
+                  : "bg-gray-200 text-gray-800"
               }`}
             >
               {getNextThemeLabel()}
@@ -177,14 +173,18 @@ export default function Navbar() {
               onClick={cycleTheme}
               aria-label={`Switch to ${getNextThemeLabel()} theme`}
               className={`p-2 rounded-full transition ${
-                isDarkMode ? "bg-white/10 text-white hover:bg-white/20" : "bg-black/5 text-gray-800 hover:bg-black/10"
+                isDarkMode
+                  ? "bg-white/10 text-white hover:bg-white/20"
+                  : "bg-black/5 text-gray-800 hover:bg-black/10"
               }`}
             >
               {getThemeIcon()}
             </button>
             <span
               className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 text-xs font-medium rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 ${
-                isDarkMode ? "bg-gray-800 text-white" : "bg-gray-200 text-gray-800"
+                isDarkMode
+                  ? "bg-gray-800 text-white"
+                  : "bg-gray-200 text-gray-800"
               }`}
             >
               {getNextThemeLabel()}
@@ -195,11 +195,7 @@ export default function Navbar() {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             className="p-2 rounded-md transition"
           >
-            {menuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
