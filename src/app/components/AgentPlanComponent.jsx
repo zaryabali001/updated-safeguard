@@ -288,7 +288,7 @@ export default function AgentPlanComponent() {
               </div>
             ))}
           </div>
-          <div className="flex justify-center pt-3 mt-[9px]">
+          <div className="flex justify-center pt-4 mt-[10px]">
             <div
               className="flex items-center gap-2 border border-blue-400  
               bg-gray-200 0 px-4 py-2 rounded-md shadow-sm 

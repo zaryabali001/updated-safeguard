@@ -13,7 +13,7 @@ export default function Footer() {
         <div>
           {/* Logo */}
           <div className="flex items-center gap-2 sm:gap-3">
-                   <div className="w-32 sm:w-38 h-10 sm:h-12 relative">
+                   <div className="w-36 sm:w-40 h-10 sm:h-12 relative">
                      <Image
                        src= "/white.svg" 
                        alt="Logo"
@@ -48,7 +48,7 @@ export default function Footer() {
 
         {/* Right Section */}
         <div>
-          <p className="text-gray-400">
+          <p className="text-gray-400 w-94">
             We welcome inquiries from investors, researchers, and organizations
             interested in AI safety. Our team will respond to serious inquiries
             within 48 hours.
