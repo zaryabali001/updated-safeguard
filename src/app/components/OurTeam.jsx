@@ -133,9 +133,7 @@ export default function OurTeam() {
                   ? "0 0 20px rgba(37,99,235,0.4)"
                   : "0 0 20px rgba(37,99,235,0.2)",
               }}
-              className={`p-6 rounded-2xl transition-shadow duration-300 ${
-                darkMode ? "bg-gray-800" : "bg-white"
-              }`}
+              className={"p-6 rounded-2xl transition-shadow duration-300 "}
             >
               {/* Image */}
               <div className="aspect-square w-full mb-4 overflow-hidden rounded-2xl">

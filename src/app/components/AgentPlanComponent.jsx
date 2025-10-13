@@ -73,7 +73,7 @@ export default function AgentPlanComponent() {
 
   return (
     <div
-      className={`flex flex-col md:flex-col lg:flex-row gap-8 lg:gap-12 
+      className={`flex flex-col md:flex-col lg:flex-row gap-8 lg:gap-6 
       p-4 sm:p-6 md:p-8 min-h-screen items-center justify-center 
       transition-colors duration-300 ${
         darkMode ? " bg-gray-900" : " bg-white"

@@ -3,16 +3,14 @@ import React, { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HumanSteering() {
   const [darkMode, setDarkMode] = useState(false);
-  const leftSectionRef = useRef(null); // Reference for left section
-  const cardRefs = useRef([]); // References for right section cards
+  const leftSectionRef = useRef(null);
+  const cardRefs = useRef([]);
 
   useEffect(() => {
-    // Animate left section
     gsap.fromTo(
       leftSectionRef.current,
       { opacity: 0, y: 60 },
@@ -30,7 +28,6 @@ export default function HumanSteering() {
       }
     );
 
-    // Animate right section cards
     cardRefs.current.forEach((card, index) => {
       gsap.fromTo(
         card,
@@ -82,7 +79,7 @@ export default function HumanSteering() {
 
   return (
     <div
-      className={`flex items-center justify-center py-12 px-6 mt-[-50px] transition-colors duration-300 ${
+      className={`flex items-center justify-center py-12 px-6 mt-[-70px] transition-colors duration-300 ${
         darkMode ? "bg-gray-900" : "bg-white"
       }`}
     >
@@ -92,7 +89,7 @@ export default function HumanSteering() {
         }`}
       >
         <div className="flex flex-col md:flex-row items-center md:items-start justify-center md:justify-between gap-10 md:gap-16 w-full">
-          {/* Left Side - Text Content */}
+          {/* Left Section */}
           <div
             ref={leftSectionRef}
             className="flex-1 text-center md:text-left mx-auto md:mx-0"
@@ -111,19 +108,18 @@ export default function HumanSteering() {
             </p>
           </div>
 
-          {/* Right Side - Options and Flow */}
+          {/* Right Section */}
           <div className="flex flex-col sm:flex-row flex-1 justify-center items-center gap-6 sm:gap-4 w-full">
-            {/* Options Column */}
+            {/* Options */}
             <div className="flex flex-col gap-4 flex-1 justify-center items-center w-full sm:w-auto ">
               {[
                 {
                   title: "Best Match",
                   selected: true,
                   bgColor: darkMode ? "bg-blue-120" : "bg-blue-600",
-                  iconBg: darkMode ? "bg-white" : "bg-gray-900",
                   icon: (
                     <svg
-                      className="w-3.5 h-3.5 text-blue-700 "
+                      className="w-3.5 h-3.5 text-blue-700"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
@@ -136,14 +132,12 @@ export default function HumanSteering() {
                   ),
                 },
                 {
-                  title: "Too Complex ",
+                  title: "Too Complex",
                   selected: false,
-                  bgColor: darkMode ? "bg-gray-900" : "bg-gray-100 ",
-
-                  iconBg: "bg-gray-100  ",
+                  bgColor: darkMode ? "bg-gray-800" : "bg-gray-100",
                   icon: (
                     <svg
-                      className="w-3 h-3 text-blue-700 "
+                      className="w-3 h-3 text-blue-700"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                     >
@@ -158,8 +152,7 @@ export default function HumanSteering() {
                 {
                   title: "Not Relevant",
                   selected: false,
-                  bgColor: darkMode ? "bg-gray-900" : "bg-gray-100 ",
-                  iconBg: "bg-gray-200",
+                  bgColor: darkMode ? "bg-gray-800" : "bg-gray-100",
                   icon: (
                     <svg
                       className="w-3 h-3 text-blue-700"
@@ -179,11 +172,11 @@ export default function HumanSteering() {
                   key={title}
                   ref={(el) => (cardRefs.current[index] = el)}
                   className={`border-2 border-dashed ${
-                    selected ? "border-blue-400" : "border-gray-300 "
+                    selected ? "border-blue-400" : "border-gray-300"
                   } rounded-lg p-4 ${bgColor} w-full sm:w-full`}
                 >
                   <div className="flex items-center gap-2 justify-center">
-                    <div className="w-5 h-5 rounded flex items-center justify-center flex-shrink-0 bg-white">
+                    <div className="w-5 h-5 rounded flex items-center justify-center bg-white">
                       {icon}
                     </div>
                     <span
@@ -192,7 +185,7 @@ export default function HumanSteering() {
                           ? "text-white"
                           : selected
                           ? "text-white"
-                          : "text-black" // ✅ Light mode non-selected text is black
+                          : "text-black"
                       }`}
                     >
                       {title}
@@ -202,14 +195,18 @@ export default function HumanSteering() {
               ))}
             </div>
 
-            {/* Human Adjustment Flow */}
+            {/* ✅ Fixed Box Styling in Dark Mode */}
             <div
               ref={(el) => (cardRefs.current[3] = el)}
-              className={`border-2 border-dashed rounded-lg p-6 w-full sm:w-56 flex flex-col items-center justify-between mt-6 sm:mt-0`}
+              className={`border-2 border-dashed rounded-lg p-6 w-full sm:w-56 flex flex-col items-center justify-between mt-6 sm:mt-0 ${
+                darkMode ? "bg-gray-800 border-gray-600" : "bg-white"
+              }`}
             >
               <div className="mb-4">
                 <svg
-                  className="w-16 h-16 text-gray-300 dark:text-gray-400"
+                  className={`w-16 h-16 ${
+                    darkMode ? "text-gray-300" : "text-gray-400"
+                  }`}
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -224,15 +221,25 @@ export default function HumanSteering() {
               </div>
 
               <div className="text-center mb-4">
-                <p className="text-gray-400 text-xs leading-relaxed">
+                <p
+                  className={`text-xs leading-relaxed ${
+                    darkMode ? "text-gray-300" : "text-gray-500"
+                  }`}
+                >
                   Human Adjusts Sliders
                   <br />
                   Refines Plan
                 </p>
               </div>
 
-              <div className="bg-gray-200 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-full px-4 py-1.5 text-center w-full">
-                <span className="text-gray-700 dark:text-white text-xs font-medium">
+              <div
+                className={`rounded-full px-4 py-1.5 text-center w-full border ${
+                  darkMode
+                    ? "bg-blue-700 border-gray-500 text-white"
+                    : "bg-gray-200 border-gray-300 text-gray-700"
+                }`}
+              >
+                <span className="text-xs font-medium">
                   Final Approved AI Plan
                 </span>
               </div>
