@@ -137,7 +137,7 @@ export default function Navbar() {
                     : "bg-white border-gray-200"
                 }`}
               >
-                {["light", "dark", "system"].map((mode) => (
+                {["Default ", "Dark", "Light"].map((mode) => (
                   <button
                     key={mode}
                     onClick={() => changeTheme(mode)}
@@ -219,7 +219,7 @@ export default function Navbar() {
                     : "bg-white border-gray-200"
                 }`}
               >
-                {["light", "dark", "system"].map((mode) => (
+                {["Default", "Dark", "White"].map((mode) => (
                   <button
                     key={mode}
                     onClick={() => changeTheme(mode)}
