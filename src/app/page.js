@@ -10,7 +10,7 @@ import HowItWorks from "./components/HowItWorks";
 import AgentPlanComponent from "./components/AgentPlanComponent";
 export default function Home() {
   return (
-    <main className=" bg-white text-black flex flex-col gap-0">
+    <main className=" bg-white text-black">
       <Navbar />
       <Hero />
       <MissionSection />

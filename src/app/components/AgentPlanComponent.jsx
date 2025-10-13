@@ -140,7 +140,10 @@ export default function AgentPlanComponent() {
             />
           </div>
           {[
-            { position: "left-[-10px]  top-1/2 -translate-y-1/2", label: "Tool" },
+            {
+              position: "left-[-10px]  top-1/2 -translate-y-1/2",
+              label: "Tool",
+            },
             {
               position: "top-6 md:top-14 left-1/2 -translate-x-1/2",
               label: "Code",
@@ -156,7 +159,9 @@ export default function AgentPlanComponent() {
             <div key={label} className={`absolute ${position}`}>
               <div
                 className={`flex ${
-                  vertical ? "flex-col items-center gap-1" : "items-center gap-2"
+                  vertical
+                    ? "flex-col items-center gap-1"
+                    : "items-center gap-2"
                 }`}
               >
                 {vertical && label !== "Chat" && (
@@ -266,8 +271,8 @@ export default function AgentPlanComponent() {
           <button
             className={`text-center text-sm font-medium pb-2 transition-all bg-gray-200 px-5 py-2 rounded-md 
                sm:text-sm shadow  duration-300 flex justify-center lg:ml-30 ml-10 mt-[-15px]   ${
-              darkMode ? " text-black" : " text-black"
-            }`}
+                 darkMode ? " text-black" : " text-black"
+               }`}
           >
             ML3 Program Generator
           </button>
@@ -286,7 +291,7 @@ export default function AgentPlanComponent() {
           <div className="flex justify-center pt-3 mt-[9px]">
             <div
               className="flex items-center gap-2 border border-blue-400  
-              bg-white dark:bg-gray-900 px-4 py-2 rounded-md shadow-sm 
+              bg-gray-200 0 px-4 py-2 rounded-md shadow-sm 
               transition-colors duration-300  mt-[2px]"
             >
               <svg
@@ -298,19 +303,20 @@ export default function AgentPlanComponent() {
                   fillRule="evenodd"
                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                   clipRule="evenodd"
+                  className="text-blue-600"
                 />
               </svg>
               <span
-                className="text-xs sm:text-sm  font-medium text-gray-900 dark:text-gray-100 
-                transition-colors duration-300"
+                className="text-xs sm:text-sm font-medium transition-colors duration-300 text-black
+  "
               >
                 Structured Plan
               </span>
             </div>
           </div>
           <div
-            className={`text-center text-xs font-medium mt-3  
-            pb-2 transition-colors duration-300 ${
+            className={`text-center text-xs font-medium mt-1  
+            pb-1 transition-colors duration-300 ${
               darkMode ? " text-white" : " text-black"
             }`}
           >
@@ -318,7 +324,10 @@ export default function AgentPlanComponent() {
           </div>
           <div className="flex justify-center flex-wrap gap-3 pt-3 ">
             {["Plan A", "Plan B", "Plan C"].map((plan, i) => (
-              <label key={plan} className="flex items-center gap-2 cursor-pointer text-white bg-gray-200 py-2 px-4 rounded-xl">
+              <label
+                key={plan}
+                className="flex items-center gap-2 cursor-pointer text-white bg-gray-200 py-2 px-4 rounded-xl"
+              >
                 <div
                   className={`w-5 h-5 rounded flex items-center justify-center 
                   ${
