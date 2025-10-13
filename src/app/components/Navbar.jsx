@@ -4,7 +4,7 @@ import { Monitor, Moon, Sun, Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
 
 export default function Navbar() {
-  const [theme, setTheme] = useState("system");
+  const [theme, setTheme] = useState("default");
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -12,13 +12,13 @@ export default function Navbar() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const storedTheme = localStorage.getItem("theme") || "system";
+    const storedTheme = localStorage.getItem("theme") || "default";
     setTheme(storedTheme);
 
     const applyTheme = (mode = storedTheme) => {
       const isDark =
         mode === "dark" ||
-        (mode === "system" &&
+        (mode === "default" &&
           window.matchMedia("(prefers-color-scheme: dark)").matches);
       document.documentElement.classList.toggle("dark", isDark);
       setIsDarkMode(isDark);
@@ -26,7 +26,7 @@ export default function Navbar() {
 
     applyTheme(storedTheme);
 
-    if (storedTheme === "system") {
+    if (storedTheme === "default") {
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
       const handleSystemChange = (e) => {
         document.documentElement.classList.toggle("dark", e.matches);
@@ -42,10 +42,12 @@ export default function Navbar() {
 
     setTheme(selectedTheme);
     localStorage.setItem("theme", selectedTheme);
+
     const isDark =
       selectedTheme === "dark" ||
-      (selectedTheme === "system" &&
+      (selectedTheme === "default" &&
         window.matchMedia("(prefers-color-scheme: dark)").matches);
+
     document.documentElement.classList.toggle("dark", isDark);
     setIsDarkMode(isDark);
     setDropdownOpen(false);
@@ -53,7 +55,7 @@ export default function Navbar() {
 
   const getThemeIcon = () => {
     switch (theme) {
-      case "system":
+      case "default":
         return <Monitor className="w-5 h-5" />;
       case "dark":
         return <Moon className="w-5 h-5" />;
@@ -137,7 +139,7 @@ export default function Navbar() {
                     : "bg-white border-gray-200"
                 }`}
               >
-                {["Default ", "Dark", "Light"].map((mode) => (
+                {["default", "dark", "light"].map((mode) => (
                   <button
                     key={mode}
                     onClick={() => changeTheme(mode)}
@@ -196,7 +198,7 @@ export default function Navbar() {
             </a>
           ))}
 
-          {/* Theme Dropdown in Mobile */}
+          {/* Theme Dropdown (Mobile) */}
           <div className="relative w-full flex flex-col items-center">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -219,7 +221,7 @@ export default function Navbar() {
                     : "bg-white border-gray-200"
                 }`}
               >
-                {["Default", "Dark", "White"].map((mode) => (
+                {["default", "dark", "light"].map((mode) => (
                   <button
                     key={mode}
                     onClick={() => changeTheme(mode)}
