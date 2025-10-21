@@ -105,7 +105,7 @@ export default function HowItWorks() {
             <span className={`${darkMode ? "text-white" : "text-black"}`}>
               How Recursive
             </span>{" "}
-            <span className="text-blue-600 ">
+            <span className="text-blue-600 "> <br />
               Safeguarding Keeps
             </span>{" "}
             <br />
@@ -124,16 +124,86 @@ export default function HowItWorks() {
         </div>
 
         {/* Right Image Section */}
-        <div className="flex-1 flex justify-center md:justify-end">
-          <Image
-            src="/handshake.png"
-            alt="Recursive Safeguarding"
-            width={500}
-            height={400}
-            className="object-contain w-[100%] sm:w-[75%] md:w-[700px] dark:brightness-90 transition-all duration-300"
-          />
-        </div>
-      </div>
+          <div className="relative w-56 sm:w-72 h-64 sm:h-96 mx-auto mt-6">
+                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
+                    <circle
+                      cx="200"
+                      cy="200"
+                      r="180"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeDasharray="8 8"
+                      className="text-gray-300 dark:text-gray-600 transition-colors duration-100"
+                    />
+                  </svg>
+                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
+                    <circle
+                      cx="200"
+                      cy="200"
+                      r="120"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeDasharray="8 8"
+                      className="text-blue-400 dark:text-blue-300 transition-colors duration-100"
+                    />
+                  </svg>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <Image
+                      src={darkMode ? "/logowhite.svg" : "/logoblack.svg"}
+                      alt="Agent"
+                      width={60}
+                      height={60}
+                      className="transition-opacity duration-300"
+                    />
+                  </div>
+                  {[
+                    {
+                      position: "left-[-10px]  top-1/2 -translate-y-1/2",
+                      label: "Tool",
+                    },
+                    {
+                      position: "top-6 md:top-14 left-1/2 -translate-x-1/2",
+                      label: "Code",
+                      vertical: true,
+                    },
+                    { position: "right-2 top-1/2 -translate-y-1/2", label: "Apps" },
+                    {
+                      position: " bottom-7 md:bottom-14  left-1/2 -translate-x-1/2",
+                      label: "Chat",
+                      vertical: true,
+                    },
+                  ].map(({ position, label, vertical }) => (
+                    <div key={label} className={`absolute ${position}`}>
+                      <div
+                        className={`flex ${
+                          vertical
+                            ? "flex-col items-center gap-1"
+                            : "items-center gap-2"
+                        }`}
+                      >
+                        {vertical && label !== "Chat" && (
+                          <div className="w-2 h-2 bg-blue-400  rounded-full transition-colors duration-300"></div>
+                        )}
+                        <div
+                          className="bg-blue-600  text-white px-3 py-1 rounded-md 
+                          text-xs sm:text-sm shadow transition-colors duration-100"
+                        >
+                          {label}
+                        </div>
+                        {!vertical && (
+                          <div className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full transition-colors duration-300"></div>
+                        )}
+                        {vertical && label === "Chat" && (
+                          <div className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full transition-colors duration-100"></div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+      
     </section>
   );
 }

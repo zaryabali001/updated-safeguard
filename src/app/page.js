@@ -5,9 +5,9 @@ import Hero from "./components/Hero";
 import MissionSection from "./components/MissionSection";
 import Footer from "./components/Footer";
 import OurTeam from "./components/OurTeam";
-import HumanSteering from "./components/HumanSteering";
+// import HumanSteering from "./components/HumanSteering";
 import HowItWorks from "./components/HowItWorks";
-import AgentPlanComponent from "./components/AgentPlanComponent";
+// import AgentPlanComponent from "./components/AgentPlanComponent";
 export default function Home() {
   return (
     <main className=" bg-white text-black">
@@ -15,8 +15,8 @@ export default function Home() {
       <Hero />
       <MissionSection />
       <HowItWorks />
-      <AgentPlanComponent />
-      <HumanSteering />
+      {/* <AgentPlanComponent /> */}
+      {/* <HumanSteering /> */}
       <OurTeam />
       <Footer></Footer>
     </main>
